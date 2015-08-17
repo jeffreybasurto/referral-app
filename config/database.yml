@@ -1,0 +1,21 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  username: referral_app
+  pool: 5
+
+development:
+  <<: *default
+  database: referral_app_development
+
+test:
+  <<: *default
+  database: referral_app_test<%= ENV['TEST_ENV_NUMBER'] %>
+
+production:
+  <<: *default
+  database: referral_app_production
+  username: referral_app
+  password: <%= ENV['referral_app_DATABASE_PASSWORD'] %>
