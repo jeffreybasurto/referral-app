@@ -90,7 +90,7 @@ Rails.application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
                         :email => {
-                          :email_prefix         => '[Referral App Live]',
+                          :email_prefix         => '[Referral App Staging]',
                           :sender_address       => 'referral_app@docdoc.sg',
                           :exception_recipients => %w{doanhung.tran@yahoo.com}
                         }

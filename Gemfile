@@ -37,8 +37,8 @@ gem 'devise_invitable'
 gem 'slim-rails'
 gem 'bootstrap-sass'
 gem 'simple_form'
-gem 'sidekiq'
-gem 'sidekiq-failures'
+gem 'sucker_punch'
+gem 'exception_notification'
 
 group :development, :test do
   gem 'byebug'
