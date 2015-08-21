@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root 'devise/sessions#new'
 
   resources :users, only: [:index]
+  resources :invitations, only: [:create]
 end

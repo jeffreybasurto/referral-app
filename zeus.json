@@ -1,6 +1,5 @@
 {
   "command": "ruby -rubygems -r./custom_plan -eZeus.go",
-
   "plan": {
     "boot": {
       "default_bundle": {
@@ -11,19 +10,11 @@
           "server": ["s"],
           "generate": ["g"],
           "destroy": ["d"],
-          "dbconsole": [],
-          "parallel_rspec": ["pspec"],
-          "parallel_cucumber": []
+          "dbconsole": []
         },
         "test_environment": {
-          "cucumber_environment": {
-                  "cucumber": [],
-                  "parallel_cucumber_worker": []
-	  },
-          "test_helper": {
-                  "test": ["rspec", "testrb"],
-                  "parallel_rspec_worker": []
-          }
+          "test_helper": {"test": ["rspec"]},
+          "parallel_rspec": ["pspec"]
         }
       }
     }

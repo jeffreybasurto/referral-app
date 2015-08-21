@@ -14,7 +14,7 @@ RSpec.describe 'User Dashboard', type: :request do
     let!(:invited_user_2) { User.invite!({ email: new_user_2_email, skip_invitation: true }, subject) }
 
     before do
-      User.accept_invitation!(invitation_token: invited_user_1.raw_invitation_token, password: 'abcdef123', password_confirmation: 'abcdef123')
+      User.accept_invitation!(invitation_token: invited_user_1.raw_invitation_token, name: 'Tester', password: 'abcdef123', password_confirmation: 'abcdef123')
     end
 
     it 'displays invitation status' do

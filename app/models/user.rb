@@ -7,11 +7,18 @@ class User < ActiveRecord::Base
   default_scope { order('id ASC') }
 
   validates :email, presence: true, uniqueness: true
+  validates_presence_of :name
   belongs_to :referrer, class_name: 'User', foreign_key: 'invited_by_id'
   has_many :referrals, class_name: 'User', foreign_key: 'invited_by_id'
 
   def docdoc_agent_id
     self.id.to_s(36)
+  end
+
+  def invite_all(emails = [])
+    emails.each do |email|
+      User.invite!({ email: email }, self)
+    end
   end
 
   private

@@ -46,11 +46,12 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
   gem 'letter_opener'
   gem 'parallel_tests'
-  gem 'zeus-parallel_tests'
   gem 'factory_girl_rails'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'simplecov', :require => false
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
 end

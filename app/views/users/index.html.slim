@@ -1,12 +1,21 @@
 .container
+  p= "Hello #{current_user.name} (#{current_user.email}). Your DocDoc agent ID is #{current_user.docdoc_agent_id}"
+
   h1 Referrals
+
   table.table.table-hover
     thead
       tr
         th Email
+        th Name
         th Status
     tbody
       - @referrals.each do |ref|
         tr
           td=ref.email
+          td=ref.name
           td=ref.invitation_accepted_at.nil? ? 'Pending.' : 'Joined.'
+
+  = simple_form_for :invitations, { url: invitations_path, method: :post } do |f|
+    = f.input :emails, as: :text
+    = f.button :submit, 'Send invitations'
