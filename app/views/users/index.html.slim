@@ -1,7 +1,8 @@
 .container
-  p= "Hello #{current_user.name} (#{current_user.email}). Your DocDoc agent ID is #{current_user.docdoc_agent_id}"
+  p= "Hello #{current_user.name} (#{current_user.email}). Your DocDoc agent ID is "
+  h4= current_user.docdoc_agent_id
 
-  h1 Referrals
+  h3 Referrals
 
   table.table.table-hover
     thead
