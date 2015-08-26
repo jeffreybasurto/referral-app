@@ -21,6 +21,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def self.new_allowed_attributes
+    %i(name)
+  end
+
   private
 
   def send_devise_notification(notification, *args)

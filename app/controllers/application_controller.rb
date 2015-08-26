@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:accept_invitation) << :name
+    %i(accept_invitation sign_up account_update).each do |symbol|
+      devise_parameter_sanitizer.for(symbol).concat User.new_allowed_attributes
+    end
   end
 end
