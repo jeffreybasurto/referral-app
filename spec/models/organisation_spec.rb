@@ -1,15 +1,14 @@
 require 'rails_helper'
 include ActiveJob::TestHelper
 
-RSpec.describe User, type: :model do
+RSpec.describe Organisation, type: :model do
   it { should validate_presence_of :email }
   it { should validate_uniqueness_of :email }
   it { should validate_presence_of :name }
-  it { should belong_to :referrer }
-  it { should have_many :referrals }
+  it { should have_many :agents }
 
   describe '#invite_all' do
-    subject { create(:user) }
+    subject { create(:organisation) }
 
     it 'sends nothing' do
       assert_performed_jobs 0 do
@@ -32,8 +31,8 @@ RSpec.describe User, type: :model do
         expect {
           subject.invite_all(emails)
           subject.reload
-        }.to change(subject.referrals, :count).by(emails.count)
-        expect(subject.referrals.pluck(:email)).to match_array emails
+        }.to change(subject.agents, :count).by(emails.count)
+        expect(subject.agents.pluck(:email)).to match_array emails
       end
     end
   end

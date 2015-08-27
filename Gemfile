@@ -39,6 +39,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'sucker_punch'
 gem 'exception_notification'
+gem 'phony_rails'
 
 group :development, :test do
   gem 'byebug'

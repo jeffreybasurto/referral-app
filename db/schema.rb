@@ -11,12 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820062938) do
+ActiveRecord::Schema.define(version: 20150826071604) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "users", force: :cascade do |t|
+  create_table "agents", force: :cascade do |t|
+    t.string   "first_name",             default: "", null: false
+    t.string   "last_name",              default: "", null: false
+    t.string   "phone",                  default: "", null: false
+    t.string   "agent_id",               default: "", null: false
+    t.string   "insurance_company_name", default: "", null: false
+    t.string   "dob",                    default: "", null: false
+    t.string   "bank_name",              default: "", null: false
+    t.string   "account_name",           default: "", null: false
+    t.string   "account_number",         default: "", null: false
+    t.string   "branch_name",            default: "", null: false
+    t.string   "branch_address",         default: "", null: false
+    t.integer  "organisation_id"
+    t.string   "email",                  default: "", null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "invitation_token"
+    t.datetime "invitation_created_at"
+    t.datetime "invitation_sent_at"
+    t.datetime "invitation_accepted_at"
+    t.integer  "invitation_limit"
+    t.integer  "invited_by_id"
+    t.string   "invited_by_type"
+    t.integer  "invitations_count",      default: 0
+  end
+
+  add_index "agents", ["email"], name: "index_agents_on_email", unique: true, using: :btree
+  add_index "agents", ["invitation_token"], name: "index_agents_on_invitation_token", unique: true, using: :btree
+  add_index "agents", ["invitations_count"], name: "index_agents_on_invitations_count", using: :btree
+  add_index "agents", ["invited_by_id"], name: "index_agents_on_invited_by_id", using: :btree
+
+  create_table "organisations", force: :cascade do |t|
+    t.string   "name",                   default: "", null: false
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -29,21 +61,9 @@ ActiveRecord::Schema.define(version: 20150820062938) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.string   "invitation_token"
-    t.datetime "invitation_created_at"
-    t.datetime "invitation_sent_at"
-    t.datetime "invitation_accepted_at"
-    t.integer  "invitation_limit"
-    t.integer  "invited_by_id"
-    t.string   "invited_by_type"
-    t.integer  "invitations_count",      default: 0
-    t.string   "name",                   default: "", null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
-  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "organisations", ["email"], name: "index_organisations_on_email", unique: true, using: :btree
+  add_index "organisations", ["reset_password_token"], name: "index_organisations_on_reset_password_token", unique: true, using: :btree
 
 end

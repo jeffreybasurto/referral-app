@@ -6,13 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-user = User.create(name: 'Tester', email: 'test@example.com', password: 'password', password_confirmation: 'password')
+org = Organisation.create(name: 'Sample Agency', email: 'test@example.com', password: 'password', password_confirmation: 'password')
 
 5.times do |i|
-  invitation = User.invite!({ email: "test#{i}@example.com", skip_invitation: true }, user)
-  User.accept_invitation!(invitation_token: invitation.raw_invitation_token, name: "Tester #{i}", password: 'password', password_confirmation: 'password')
+  invitation = Agent.invite!({ email: "test#{i}@example.com", skip_invitation: true }, org)
+  Agent.accept_invitation!(invitation_token: invitation.raw_invitation_token, bank_name: 'Mandiri', insurance_company_name: 'AIA FINANCIAL', first_name: 'First', last_name: 'Last', phone: '+62 21 6539-0605', dob: '27/08/1985', account_name: 'tester account', account_number: '123123123123123', branch_name: 'random bank branch')
 end
 
 5.times do |i|
-  User.invite!({ email: "test#{i + 5}@example.com", skip_invitation: true }, user)
+  Agent.invite!({ email: "test#{i + 5}@example.com", skip_invitation: true }, org)
 end

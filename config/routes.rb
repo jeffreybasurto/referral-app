@@ -1,14 +1,15 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :agents, only: :invitations
+  devise_for :organisations
 
-  devise_scope :user do
-    authenticated :user do
-      root 'users#index', as: :authenticated_root
+  devise_scope :organisation do
+    authenticated :organisation do
+      root 'organisations#index', as: :authenticated_root
     end
   end
 
   root 'devise/sessions#new'
 
-  resources :users, only: [:index]
+  resources :organisations, only: [:index]
   resources :invitations, only: [:create]
 end

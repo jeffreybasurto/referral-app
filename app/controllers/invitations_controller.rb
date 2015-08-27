@@ -2,8 +2,8 @@ class InvitationsController < ApplicationController
   def create
     emails = invitation_params[:emails].split(',')
 
-    current_user.invite_all(emails)
-    redirect_to users_path
+    current_organisation.invite_all(emails)
+    redirect_to organisations_path
   end
 
   private

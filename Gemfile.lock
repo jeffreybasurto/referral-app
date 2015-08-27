@@ -118,6 +118,10 @@ GEM
     parallel_tests (1.6.1)
       parallel
     pg (0.18.2)
+    phony (2.14.14)
+    phony_rails (0.12.10)
+      activesupport (>= 3.0)
+      phony (~> 2.12)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -248,6 +252,7 @@ DEPENDENCIES
   letter_opener
   parallel_tests
   pg
+  phony_rails
   rails (= 4.2.3)
   rspec-rails
   sass-rails (~> 5.0)

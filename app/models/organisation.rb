@@ -1,28 +1,20 @@
-class User < ActiveRecord::Base
+class Organisation < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+  include DeviseInvitable::Inviter
 
   default_scope { order('id ASC') }
 
   validates :email, presence: true, uniqueness: true
   validates_presence_of :name
-  belongs_to :referrer, class_name: 'User', foreign_key: 'invited_by_id'
-  has_many :referrals, class_name: 'User', foreign_key: 'invited_by_id'
-
-  def docdoc_agent_id
-    self.id.to_s(36)
-  end
+  has_many :agents
 
   def invite_all(emails = [])
     emails.each do |email|
-      User.invite!({ email: email }, self)
+      Agent.invite!({ email: email }, self)
     end
-  end
-
-  def self.new_allowed_attributes
-    %i(name)
   end
 
   private
