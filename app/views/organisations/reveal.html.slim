@@ -1,2 +1,2 @@
 .container
-  p= "Your referral link is #{new_agent_path(invitation_token: @referral_token)}"
+  p= t('dashboard.reveal', path: new_agent_path(invitation_token: @referral_token))

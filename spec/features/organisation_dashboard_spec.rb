@@ -19,21 +19,20 @@ RSpec.feature 'Organisation dashboard', type: :feature do
 
     click_link I18n.t('devise.registrations.sign_up_link')
 
-    fill_in 'Email', with: sample.email
-    fill_in 'Name', with: sample.name
-    fill_in 'organisation[password]', with: 'password'
-    fill_in 'organisation[password_confirmation]', with: 'password'
-
+    fill_in I18n.t('simple_form.labels.defaults.email'), with: sample.email
+    fill_in I18n.t('simple_form.labels.defaults.name'), with: sample.name
+    fill_in I18n.t('simple_form.labels.defaults.password'), with: 'password'
+    fill_in I18n.t('simple_form.labels.defaults.password_confirmation'), with: 'password'
 
     expect {
-      click_button 'Sign up'
+      click_button I18n.t('helpers.submit.organisation.create')
     }.to change(Organisation, :count).by(1)
 
-    click_link 'Sign out'
-    fill_in 'Email', with: sample.email
-    fill_in 'Password', with: 'password'
-    click_button 'Log in'
-    expect(page).to have_content "Hello #{sample.name} (#{sample.email})."
+    click_link I18n.t('devise.sessions.log_out')
+    fill_in I18n.t('simple_form.labels.defaults.email'), with: sample.email
+    fill_in I18n.t('simple_form.labels.defaults.password'), with: 'password'
+    click_button I18n.t('devise.sessions.log_in_button')
+    expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end
 
   scenario 'View listing' do
@@ -42,12 +41,12 @@ RSpec.feature 'Organisation dashboard', type: :feature do
 
     within 'tbody tr:nth-child(1)' do
       expect(page).to have_content agent_1_params.email
-      expect(page).to have_content 'Joined.'
+      expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.joined')
     end
 
     within 'tbody tr:nth-child(2)' do
       expect(page).to have_content agent_2_params.email
-      expect(page).to have_content 'Pending.'
+      expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.pending')
     end
   end
 
@@ -57,18 +56,18 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    fill_in 'Emails', with: emails.join(',')
+    fill_in I18n.t('simple_form.labels.defaults.emails'), with: emails.join(',')
 
     expect_any_instance_of(Organisation).to receive(:invite_all).with(emails)
-    click_button 'Send invitations'
+    click_button I18n.t('helpers.submit.invitations.submit')
   end
 
   scenario 'Referral link' do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    expect(page).to have_link('Looking for your referral link? You can find it here', href: reveal_referral_token_path)
-    click_link 'Looking for your referral link? You can find it here'
-    expect(page).to have_content("Your referral link is #{new_agent_path(invitation_token: subject.referral_token)}")
+    expect(page).to have_link(I18n.t('dashboard.referral_link'), href: reveal_referral_token_path)
+    click_link I18n.t('dashboard.referral_link')
+    expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_path(invitation_token: subject.referral_token)))
   end
 end

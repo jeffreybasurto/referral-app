@@ -9,6 +9,7 @@ require 'database_cleaner'
 require 'capybara/rails'
 
 ActiveRecord::Migration.maintain_test_schema!
+Capybara.match = :prefer_exact
 
 RSpec.configure do |config|
   # config.use_transactional_fixtures = true

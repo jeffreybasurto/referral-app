@@ -3,19 +3,22 @@ en:
     required:
       text: 'required'
       mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Please review the problems below:"
     labels:
-      organisations:
-        name: "Name"
+      defaults:
+        name: "Agency Name"
         email: "Email"
+        emails: "Emails"
         password: "Password"
-        password_confirmation: "Password confirmation"
-      organisations:
-        name: "Name"
-        email: "Email"
-        password: "Password"
-        password_confirmation: "Password confirmation"
+        password_confirmation: "Password Confirmation"
+        first_name: "First Name"
+        last_name: "Last Name"
+        phone: "Phone Number"
+        dob: "Date of Birth"
+        insurance_company_name: "Insurance Company"
+        bank_name: "Bank Name"
+        account_name: "Account Name"
+        branch_name: "Bank Branch"
+        branch_address: "Bank Branch Address"
+        account_number: "Account Number"

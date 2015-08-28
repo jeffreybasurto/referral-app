@@ -1,14 +1,17 @@
 = f.input :first_name, required: true
 = f.input :last_name
-= f.input :phone, label: 'Phone number', as: :tel, required: true
-= f.input :dob, label: 'Date of birth', as: :date_time_picker, required: true
-= f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, label: 'Insurance company', required: true
-= f.collection_radio_buttons :bank_name, Agent::BANK_NAMES, :to_s, :to_s, label: 'Bank name', required: true
+= f.input :phone, as: :tel, required: true
+= f.input :dob, as: :date_time_picker, required: true
+= f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, required: true
+.form-group
+  = f.label :bank_name
+  .input-group
+    = f.collection_radio_buttons :bank_name, Agent::BANK_NAMES, :to_s, :to_s, required: true, item_wrapper_class: 'radio-inline'
 = f.input :account_name, required: true
-= f.input :branch_name, label: 'Bank branch', required: true
-= f.input :branch_address, label: 'Bank branch address'
+= f.input :branch_name, required: true
+= f.input :branch_address
 = f.input :account_number, required: true
-= f.button :submit, t('devise.invitations.edit.submit_button')
+= f.button :submit
 
 coffee:
   $(->

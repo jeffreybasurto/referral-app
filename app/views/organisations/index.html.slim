@@ -1,5 +1,5 @@
 .container
-  p= "Hello #{current_organisation.name} (#{current_organisation.email})."
+  p= t('dashboard.greeting', name: current_organisation.name, email: current_organisation.email)
 
   h3 Referrals
 
@@ -16,10 +16,10 @@
           td=ref.email
           td=ref.name
           td=ref.docdoc_agent_id
-          td=ref.invitation_accepted_at.nil? ? 'Pending.' : 'Joined.'
+          td=ref.invitation_accepted_at.nil? ? t('dashboard.table.headers.invitation_statuses.pending') : t('dashboard.table.headers.invitation_statuses.joined')
 
   = simple_form_for :invitations, { url: invitations_path, method: :post } do |f|
     = f.input :emails, as: :text
-    = f.button :submit, 'Send invitations'
+    = f.button :submit
 
-  p= link_to 'Looking for your referral link? You can find it here', reveal_referral_token_path
+  p= link_to t('dashboard.referral_link'), reveal_referral_token_path

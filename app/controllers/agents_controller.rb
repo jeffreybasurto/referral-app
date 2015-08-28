@@ -13,7 +13,7 @@ class AgentsController < ApplicationController
 
     if @agent.save
       @agent.send_intro_email
-      render text: 'Thank you for registering with us. An email has been sent with more information.'
+      render text: I18n.t('devise.registrations.agent_success')
     else
       render 'new'
     end
@@ -27,6 +27,6 @@ class AgentsController < ApplicationController
 
   def fetch_organisation
     @organisation = Organisation.where(referral_token: params['invitation_token']).first
-    raise ActionController::RoutingError.new('Page not found.') unless @organisation.present?
+    raise ActionController::RoutingError.new(I18n.t('errors.messages.404')) unless @organisation.present?
   end
 end
