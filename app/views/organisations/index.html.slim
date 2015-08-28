@@ -15,7 +15,7 @@
         tr
           td=ref.email
           td=ref.name
-          td=ref.docdoc_agent_id
+          td=ref.agent_id
           td=ref.invitation_accepted_at.nil? ? t('dashboard.table.headers.invitation_statuses.pending') : t('dashboard.table.headers.invitation_statuses.joined')
 
   = simple_form_for :invitations, { url: invitations_path, method: :post } do |f|

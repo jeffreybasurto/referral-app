@@ -12,7 +12,7 @@ class Organisation < ActiveRecord::Base
   validates_presence_of :name
 
   before_validation :generate_referral_token
-  has_many :agents
+  has_many :agents, dependent: :destroy
 
   def invite_all(emails = [])
     emails.each do |email|

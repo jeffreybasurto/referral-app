@@ -52,7 +52,5 @@ class CreateAgents < ActiveRecord::Migration
     # add_index :agents, :reset_password_token, unique: true
     # add_index :agents, :confirmation_token,   unique: true
     # add_index :agents, :unlock_token,         unique: true
-
-    execute('ALTER SEQUENCE agents_id_seq RESTART 61000000')
   end
 end

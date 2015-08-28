@@ -13,14 +13,12 @@ class Agent < ActiveRecord::Base
   validates_plausible_phone :phone, presence: true, default_country_code: 'ID'
   validate :dob_valid?
 
+  before_validation :generate_agent_id
+
   attr_accessor :password #to make devise_invitable happy
 
   def name
     last_name.present? ? "#{first_name} #{last_name}" : first_name
-  end
-
-  def docdoc_agent_id
-    self.id.to_s(36)
   end
 
   def send_intro_email
@@ -36,6 +34,21 @@ class Agent < ActiveRecord::Base
       return false
     end
   end
+
+  def generate_agent_id
+    return if self.agent_id.present?
+    length = 6
+
+    loop do
+      self.agent_id = Devise.friendly_token(length)
+      if Agent.where(agent_id: self.agent_id).count.zero?
+        break
+      else
+        length += 1
+      end
+    end
+  end
+
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later

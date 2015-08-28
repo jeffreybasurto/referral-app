@@ -16,4 +16,27 @@ RSpec.describe Agent, type: :model do
     it { should validate_presence_of :account_number }
     it { should validate_presence_of :branch_name }
   end
+
+  describe '#generate_agent_id' do
+    let!(:org) { create :organisation }
+    let(:existing_agent) { create :agent, organisation: org }
+    let(:existing_id) { existing_agent.agent_id }
+    let!(:new_id) { Devise.friendly_token(10) }
+    subject { build :agent, organisation: org }
+
+    context 'taken' do
+      it 'retries with higher length' do
+        expect(Devise).to receive(:friendly_token).with(6).and_return existing_id
+        expect(Devise).to receive(:friendly_token).with(7).and_return existing_id
+        expect(Devise).to receive(:friendly_token).with(8).and_return existing_id
+        expect(Devise).to receive(:friendly_token).with(9).and_return existing_id
+        allow(Devise).to receive(:friendly_token).with(10).and_return new_id
+
+        expect {
+          expect(subject).to be_valid
+        }.to change(subject, :agent_id).from(nil).to(new_id)
+      end
+    end
+  end
+
 end
