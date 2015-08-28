@@ -35,6 +35,15 @@ en:
         submit: "Send invitations"
   dashboard:
     greeting: "Hello %{name} (%{email})."
+    stats:
+      explanation: "Your current stats are: %{sign_ups} %{divider} %{sent}"
+      divider: " / "
+      sign_ups:
+        one: "%{count} sign up"
+        other: "%{count} sign ups"
+      sent:
+        one: "%{count} mail sent"
+        other: "%{count} mails sent"
     header: "Referrals"
     table:
       headers:

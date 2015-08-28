@@ -20,6 +20,14 @@ class Organisation < ActiveRecord::Base
     end
   end
 
+  def mails_sent
+    self.agents.created_by_invite.count
+  end
+
+  def mails_accepted
+    self.agents.invitation_accepted.count
+  end
+
   private
   def generate_referral_token
     return if self.referral_token.present?

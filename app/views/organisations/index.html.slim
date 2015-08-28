@@ -1,7 +1,9 @@
 .container
   p= t('dashboard.greeting', name: current_organisation.name, email: current_organisation.email)
 
-  h3 Referrals
+  h3= t('dashboard.header')
+
+  p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.mails_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.mails_sent))
 
   table.table.table-hover
     thead
