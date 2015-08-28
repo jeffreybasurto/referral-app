@@ -16,3 +16,5 @@
 //= require bootstrap-sprockets
 //= require bootstrap/transition
 //= require bootstrap/collapse
+//= require moment
+//= require bootstrap-datetimepicker

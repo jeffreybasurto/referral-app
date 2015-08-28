@@ -1,0 +1,7 @@
+h2= t 'devise.invitations.edit.header'
+
+= simple_form_for @agent, url: agent_path, html: { method: :post } do |f|
+  = f.error_notification
+  = f.hidden_field :organisation_id
+  = f.input :email, required: true, as: :email
+  = render partial: 'agents/fields', locals: { f: f }

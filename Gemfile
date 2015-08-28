@@ -40,6 +40,8 @@ gem 'simple_form'
 gem 'sucker_punch'
 gem 'exception_notification'
 gem 'phony_rails'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 
 group :development, :test do
   gem 'byebug'

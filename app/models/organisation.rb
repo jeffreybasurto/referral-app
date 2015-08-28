@@ -8,7 +8,10 @@ class Organisation < ActiveRecord::Base
   default_scope { order('id ASC') }
 
   validates :email, presence: true, uniqueness: true
+  validates :referral_token, presence: true, uniqueness: true
   validates_presence_of :name
+
+  before_validation :generate_referral_token
   has_many :agents
 
   def invite_all(emails = [])
@@ -18,6 +21,19 @@ class Organisation < ActiveRecord::Base
   end
 
   private
+  def generate_referral_token
+    return if self.referral_token.present?
+    length = 20
+
+    loop do
+      self.referral_token = Devise.friendly_token(length)
+      if Organisation.where(referral_token: self.referral_token).count.zero?
+        break
+      else
+        length += 1
+      end
+    end
+  end
 
   def send_devise_notification(notification, *args)
     devise_mailer.send(notification, self, *args).deliver_later

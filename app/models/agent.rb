@@ -23,6 +23,10 @@ class Agent < ActiveRecord::Base
     self.id.to_s(36)
   end
 
+  def send_intro_email
+    #TODO
+  end
+
   private
   def dob_valid?
     begin

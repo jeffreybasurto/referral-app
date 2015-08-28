@@ -21,3 +21,5 @@
   = simple_form_for :invitations, { url: invitations_path, method: :post } do |f|
     = f.input :emails, as: :text
     = f.button :submit, 'Send invitations'
+
+  p= link_to 'Looking for your referral link? You can find it here', reveal_referral_token_path

@@ -24,4 +24,25 @@ RSpec.feature 'Agents registration', type: :feature do
       click_button I18n.t('devise.invitations.edit.submit_button')
     }.to change(Agent.invitation_accepted, :count).by(1)
   end
+
+  scenario 'Agent sign up from link' do
+    visit new_agent_path(invitation_token: org.referral_token)
+
+    fill_in 'Email', with: sample.email
+    fill_in 'First name', with: sample.first_name
+    fill_in 'Last name', with: sample.last_name
+    fill_in 'Phone number', with: sample.phone
+    fill_in 'Date of birth', with: sample.dob
+    select sample.insurance_company_name, from: 'Insurance company'
+    choose sample.bank_name
+    fill_in 'Account name', with: sample.account_name
+    fill_in 'Account number', with: sample.account_number
+    fill_in 'agent[branch_name]', with: sample.branch_name
+    fill_in 'agent[branch_address]', with: sample.branch_address
+
+    expect_any_instance_of(Agent).to receive(:send_intro_email)
+    expect {
+      click_button I18n.t('devise.invitations.edit.submit_button')
+    }.to change(Agent.invitation_accepted, :count).by(1)
+  end
 end

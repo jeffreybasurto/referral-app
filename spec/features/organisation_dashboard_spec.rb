@@ -62,4 +62,13 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     expect_any_instance_of(Organisation).to receive(:invite_all).with(emails)
     click_button 'Send invitations'
   end
+
+  scenario 'Referral link' do
+    login_as(subject, :scope => :organisation)
+    visit root_path
+
+    expect(page).to have_link('Looking for your referral link? You can find it here', href: reveal_referral_token_path)
+    click_link 'Looking for your referral link? You can find it here'
+    expect(page).to have_content("Your referral link is #{new_agent_path(invitation_token: subject.referral_token)}")
+  end
 end

@@ -10,7 +10,7 @@ FactoryGirl.define do
       "Last Name #{n}"
     end
     phone '+62 21 6539-0605'
-    dob 30.years.ago.strftime('%d/%m/%Y')
+    dob Date.today - 30.years
     bank_name 'Mandiri'
     insurance_company_name 'AIA FINANCIAL'
     account_name 'tester account'

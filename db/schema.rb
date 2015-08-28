@@ -11,23 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150826071604) do
+ActiveRecord::Schema.define(version: 20150827065015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "agents", force: :cascade do |t|
-    t.string   "first_name",             default: "", null: false
-    t.string   "last_name",              default: "", null: false
-    t.string   "phone",                  default: "", null: false
-    t.string   "agent_id",               default: "", null: false
-    t.string   "insurance_company_name", default: "", null: false
-    t.string   "dob",                    default: "", null: false
-    t.string   "bank_name",              default: "", null: false
-    t.string   "account_name",           default: "", null: false
-    t.string   "account_number",         default: "", null: false
-    t.string   "branch_name",            default: "", null: false
-    t.string   "branch_address",         default: "", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.string   "agent_id"
+    t.string   "insurance_company_name"
+    t.date     "dob"
+    t.string   "bank_name"
+    t.string   "account_name"
+    t.string   "account_number"
+    t.string   "branch_name"
+    t.string   "branch_address"
     t.integer  "organisation_id"
     t.string   "email",                  default: "", null: false
     t.datetime "created_at",                          null: false
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20150826071604) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "referral_token"
   end
 
   add_index "organisations", ["email"], name: "index_organisations_on_email", unique: true, using: :btree

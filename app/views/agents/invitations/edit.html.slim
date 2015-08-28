@@ -3,15 +3,4 @@ h2= t 'devise.invitations.edit.header'
 = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put } do |f|
   = devise_error_messages!
   = f.hidden_field :invitation_token
-
-  = f.input :first_name, required: true
-  = f.input :last_name
-  = f.input :phone, label: 'Phone number', as: :tel, required: true
-  = f.input :dob, label: 'Date of birth', required: true
-  = f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, label: 'Insurance company', required: true
-  = f.collection_radio_buttons :bank_name, Agent::BANK_NAMES, :to_s, :to_s, label: 'Bank name', required: true
-  = f.input :account_name, required: true
-  = f.input :branch_name, label: 'Bank branch', required: true
-  = f.input :branch_address, label: 'Bank branch address'
-  = f.input :account_number, required: true
-  = f.button :submit, t('devise.invitations.edit.submit_button')
+  = render partial: 'agents/fields', locals: { f: f }

@@ -36,4 +36,24 @@ RSpec.describe Organisation, type: :model do
       end
     end
   end
+
+  describe '#generate_referral_token' do
+    let(:org_with_existing_token) { create :organisation }
+    let(:existing_token) { org_with_existing_token.referral_token }
+    let!(:new_token) { Devise.friendly_token(23) }
+    subject { build :organisation }
+
+    context 'taken' do
+      it 'retries with higher length' do
+        expect(Devise).to receive(:friendly_token).with(20).and_return existing_token
+        expect(Devise).to receive(:friendly_token).with(21).and_return existing_token
+        expect(Devise).to receive(:friendly_token).with(22).and_return existing_token
+        allow(Devise).to receive(:friendly_token).with(23).and_return new_token
+
+        expect{
+          expect(subject).to be_valid
+        }.to change(subject, :referral_token).from(nil).to(new_token)
+      end
+    end
+  end
 end

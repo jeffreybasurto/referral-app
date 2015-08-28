@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_organisation!
 
   protected
-  def authenticate_inviter!
-    authenticate_organisation!(:force => true)
-  end
-
   def devise_parameter_sanitizer
     if resource_class == Agent
       Agent::ParameterSanitizer.new(Agent, :agent, params)

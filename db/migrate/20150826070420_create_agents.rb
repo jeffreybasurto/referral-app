@@ -1,17 +1,17 @@
 class CreateAgents < ActiveRecord::Migration
   def change
     create_table :agents do |t|
-      t.string :first_name, null: false, default: ''
-      t.string :last_name, null: false, default: ''
-      t.string :phone, null: false, default: ''
-      t.string :agent_id, null: false, default: ''
-      t.string :insurance_company_name, null: false, default: ''
-      t.string :dob, null: false, default: ''
-      t.string :bank_name, null: false, default: ''
-      t.string :account_name, null: false, default: ''
-      t.string :account_number, null: false, default: ''
-      t.string :branch_name, null: false, default: ''
-      t.string :branch_address, null: false, default: ''
+      t.string :first_name
+      t.string :last_name
+      t.string :phone
+      t.string :agent_id
+      t.string :insurance_company_name
+      t.date :dob
+      t.string :bank_name
+      t.string :account_name
+      t.string :account_number
+      t.string :branch_name
+      t.string :branch_address
       t.integer :organisation_id
 
       ## Database authenticatable

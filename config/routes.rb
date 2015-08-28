@@ -8,8 +8,10 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'devise/sessions#new'
-
   resources :organisations, only: [:index]
   resources :invitations, only: [:create]
+  resource :agent, only: %i(new create)
+
+  root 'devise/sessions#new'
+  get 'reveal_referral_token', to: 'organisations#reveal_referral_link'
 end
