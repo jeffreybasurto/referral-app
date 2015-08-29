@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby '2.2.1p85'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
@@ -44,6 +44,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'i18n-debug', group: :development
 gem 'kaminari'
+gem 'rails_12factor', group: [:staging, :production]
 
 group :development, :test do
   gem 'byebug'
