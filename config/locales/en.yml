@@ -20,11 +20,20 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  app_name: 'DocDoc Referral'
   errors:
     messages:
       improbable_phone: "is an invalid number"
       404: "Page not found"
   helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "No %{entry_name} found"
+          one: "1 %{entry_name}"
+          other: "%{count} %{entry_name}"
+      more_pages:
+        display_entries: "%{first}-%{last} of %{total}"
     submit:
       organisation:
         create: "Sign up"
@@ -34,7 +43,7 @@ en:
       invitations:
         submit: "Send invitations"
   dashboard:
-    greeting: "Hello %{name} (%{email})."
+    greeting: "Hello %{name} (%{email})"
     stats:
       explanation: "Your current stats are: %{sign_ups} %{divider} %{sent}"
       divider: " / "

@@ -5,15 +5,15 @@ en:
       mark: '*'
     error_notification:
       default_message: "Please review the problems below:"
-    labels:
+    placeholders:
       defaults:
         name: "Agency Name"
-        email: "Email"
-        emails: "Emails"
+        emails: "Referral Email Addresses"
+        email: "Email Address"
         password: "Password"
         password_confirmation: "Password Confirmation"
-        first_name: "First Name"
-        last_name: "Last Name"
+        first_name: "Given Name"
+        last_name: "Family Name"
         phone: "Phone Number"
         dob: "Date of Birth"
         insurance_company_name: "Insurance Company"

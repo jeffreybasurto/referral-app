@@ -1,27 +1,44 @@
-.container
-  p= t('dashboard.greeting', name: current_organisation.name, email: current_organisation.email)
+#organisation
+  #basic-info
+    .container
+      p#welcome= t('dashboard.greeting', name: current_organisation.name, email: current_organisation.email)
 
-  h3= t('dashboard.header')
+      h3= t('dashboard.header')
 
-  p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.mails_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.mails_sent))
+      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.mails_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.mails_sent))
 
-  table.table.table-hover
-    thead
-      tr
-        th Email
-        th Name
-        th Agent ID
-        th Status
-    tbody
-      - @agents.each do |ref|
-        tr
-          td=ref.email
-          td=ref.name
-          td=ref.agent_id
-          td=ref.invitation_accepted_at.nil? ? t('dashboard.table.headers.invitation_statuses.pending') : t('dashboard.table.headers.invitation_statuses.joined')
+  = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
+    .container
+      = f.button :submit, class: 'btn-warning pull-right'
+      span= f.input_field :emails, label: false, class: 'form-control'
 
-  = simple_form_for :invitations, { url: invitations_path, method: :post } do |f|
-    = f.input :emails, as: :text
-    = f.button :submit
+  #email-stats.container
+    .pull-right
+      span#entries-info= page_entries_info @agents
+      #pagination-nav-links.pull-right
+        = link_to_previous_page @agents, raw('&lt;') do
+          span.last &lt;
+        = link_to_next_page @agents, raw('&gt;') do
+          span.last &gt;
+    .clearfix
 
-  p= link_to t('dashboard.referral_link'), reveal_referral_token_path
+    #agents-list
+      table.table.table-striped
+        thead
+          tr
+            th Referral Email
+            th Agent Name
+            th Agent ID
+            th Status
+        tbody
+          - @agents.each do |ref|
+            tr
+              td= mail_to ref.email
+              td= ref.name
+              td= ref.agent_id
+              - if ref.invitation_accepted_at.nil?
+                td.pending= t('dashboard.table.headers.invitation_statuses.pending')
+              - else
+                td.joined= t('dashboard.table.headers.invitation_statuses.joined')
+
+    p= link_to t('dashboard.referral_link'), reveal_referral_token_path

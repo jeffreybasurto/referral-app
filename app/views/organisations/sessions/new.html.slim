@@ -1,12 +1,18 @@
-h2 Log in
+#login
+  .panel.panel-default
+    .panel-heading
+      h1.panel-title= t('app_name')
+    .panel-body
+      = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        .form-header= t('devise.sessions.log_in')
+        = f.input :email, required: true, autofocus: true, label: false
+        = f.input :password, required: true, label: false
+        = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
+        = f.button :submit, t('devise.sessions.log_in'), class: 'btn-warning'
 
-= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :email, required: false, autofocus: true
-    = f.input :password, required: false
-    = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-
-  .form-actions
-    = f.button :submit, t('devise.sessions.log_in_button')
-
-= render 'devise/shared/links'
+      .clearfix
+      = link_to t('devise.recovers.link'), new_password_path(resource_name)
+    .panel-footer
+      = t('devise.registrations.sign_up_question')
+      | &nbsp;
+      span= link_to t('devise.registrations.sign_up'), new_registration_path(resource_name)

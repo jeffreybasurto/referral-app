@@ -1,0 +1,9 @@
+#send-reset
+  .panel.panel-default
+    .panel-body
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+        .form-header= t('devise.passwords.new_header')
+        p= t('devise.passwords.reset_instructions')
+        = f.input :email, required: true, autofocus: true, label: false
+        = link_to 'Cancel', :back, id: 'back-link'
+        = f.button :submit, t('devise.passwords.send_button'), class: 'btn-warning'

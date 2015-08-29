@@ -6,22 +6,28 @@ en:
       reset_password_instructions:
         subject: "Reset password instructions"
     passwords:
+      new_header: "Reset your password"
+      edit_header: "Change your password"
+      save_button: "Save"
+      send_button: "Reset"
+      reset_instructions: "Enter your email address below and we'll send you a link to reset your password."
       no_token: "You can't access this page without coming from a password reset email. If you do come from a password reset email, please make sure you used the full URL provided."
       send_instructions: "You will receive an email with instructions on how to reset your password in a few minutes."
       send_paranoid_instructions: "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
       updated: "Your password has been changed successfully. You are now signed in."
       updated_not_active: "Your password has been changed successfully."
     registrations:
-      sign_up_link: "Sign up"
+      sign_up: "Sign up"
       signed_up: "Welcome! You have signed up successfully."
-      password_hint: "%{min_pass_length} characters minimum"
       agent_success: "Thank you for registering with us. An email has been sent with more information."
+      sign_up_question: "Don’t have an account?"
     recovers:
       link: "Forgot your password?"
     sessions:
-      log_in_link: "Log in"
-      log_out: "Log out"
-      log_in_button: "Log in"
+      log_in: "Login"
+      log_out: "Logout"
+      log_in_here: "Login here"
+      log_in_question: "Already have an account?"
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."

@@ -17,21 +17,21 @@ RSpec.feature 'Organisation dashboard', type: :feature do
   scenario 'Organisation sign up' do
     visit root_path
 
-    click_link I18n.t('devise.registrations.sign_up_link')
+    click_link I18n.t('devise.registrations.sign_up')
 
-    fill_in I18n.t('simple_form.labels.defaults.email'), with: sample.email
-    fill_in I18n.t('simple_form.labels.defaults.name'), with: sample.name
-    fill_in I18n.t('simple_form.labels.defaults.password'), with: 'password'
-    fill_in I18n.t('simple_form.labels.defaults.password_confirmation'), with: 'password'
+    fill_in 'organisation[name]', with: sample.name
+    fill_in 'organisation[email]', with: sample.email
+    fill_in 'organisation[password]', with: 'password'
+    fill_in 'organisation[password_confirmation]', with: 'password'
 
     expect {
       click_button I18n.t('helpers.submit.organisation.create')
     }.to change(Organisation, :count).by(1)
 
     click_link I18n.t('devise.sessions.log_out')
-    fill_in I18n.t('simple_form.labels.defaults.email'), with: sample.email
-    fill_in I18n.t('simple_form.labels.defaults.password'), with: 'password'
-    click_button I18n.t('devise.sessions.log_in_button')
+    fill_in 'organisation[email]', with: sample.email
+    fill_in 'organisation[password]', with: 'password'
+    click_button I18n.t('devise.sessions.log_in')
     expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end
 
@@ -58,7 +58,7 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    fill_in I18n.t('simple_form.labels.defaults.emails'), with: emails.join(',')
+    fill_in 'invitations[emails]', with: emails.join(',')
 
     expect_any_instance_of(Organisation).to receive(:invite_all).with(emails)
     click_button I18n.t('helpers.submit.invitations.submit')
@@ -70,6 +70,6 @@ RSpec.feature 'Organisation dashboard', type: :feature do
 
     expect(page).to have_link(I18n.t('dashboard.referral_link'), href: reveal_referral_token_path)
     click_link I18n.t('dashboard.referral_link')
-    expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_path(invitation_token: subject.referral_token)))
+    expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_url(invitation_token: subject.referral_token)))
   end
 end

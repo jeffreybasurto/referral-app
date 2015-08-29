@@ -1,0 +1,13 @@
+#change-password
+  .panel.panel-default
+    .panel-body
+      = simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f|
+        .form-header= t('devise.passwords.edit_header')
+        = f.input :reset_password_token, as: :hidden
+        = f.full_error :reset_password_token
+        .form-inputs
+          = f.input :password, required: true, label: false
+          = f.input :password_confirmation, required: true, label: false
+
+        .form-actions
+          = f.button :submit, t('devise.passwords.save_button'), class: 'btn-warning'

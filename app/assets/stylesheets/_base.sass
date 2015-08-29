@@ -1,0 +1,38 @@
+@import 'utilities/variables'
+
+html, body
+  height: 100%
+
+*
+  color: #333333
+  font-family: 'Open Sans', sans-serif
+  font-weight: normal
+  font-size: 14px
+
+a
+  color: #365870 !important
+
+.dropdown-menu:before
+  position: absolute
+  top: -7px
+  left: 9px
+  display: inline-block
+  border-right: 7px solid transparent
+  border-bottom: 7px solid #ccc
+  border-left: 7px solid transparent
+  border-bottom-color: rgba(0, 0, 0, 0.2)
+  content: ''
+
+.dropdown-menu:after
+  position: absolute
+  top: -6px
+  left: 10px
+  display: inline-block
+  border-right: 6px solid transparent
+  border-bottom: 6px solid #ffffff
+  border-left: 6px solid transparent
+  content: ''
+
+@media (min-width: 1200px)
+  .container
+    width: 970px

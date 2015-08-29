@@ -43,6 +43,7 @@ gem 'phony_rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'i18n-debug', group: :development
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug'

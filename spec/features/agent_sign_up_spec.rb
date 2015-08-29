@@ -30,14 +30,14 @@ RSpec.feature 'Agents registration', type: :feature do
 end
 
 def fill_in_common_fields
-  fill_in I18n.t('simple_form.labels.defaults.first_name'), with: sample.first_name
-  fill_in I18n.t('simple_form.labels.defaults.last_name'), with: sample.last_name
-  fill_in I18n.t('simple_form.labels.defaults.phone'), with: sample.phone
-  fill_in I18n.t('simple_form.labels.defaults.dob'), with: sample.dob
-  select sample.insurance_company_name, from: I18n.t('simple_form.labels.defaults.insurance_company_name')
+  fill_in 'agent[first_name]', with: sample.first_name
+  fill_in 'agent[last_name]', with: sample.last_name
+  fill_in 'agent[phone]', with: sample.phone
+  fill_in 'agent[dob]', with: sample.dob
+  select sample.insurance_company_name, from: 'agent[insurance_company_name]'
   choose sample.bank_name
-  fill_in I18n.t('simple_form.labels.defaults.account_name'), with: sample.account_name
-  fill_in I18n.t('simple_form.labels.defaults.account_number'), with: sample.account_number
-  fill_in I18n.t('simple_form.labels.defaults.branch_name'), with: sample.branch_name
-  fill_in I18n.t('simple_form.labels.defaults.branch_address'), with: sample.branch_address
+  fill_in 'agent[account_name]', with: sample.account_name
+  fill_in 'agent[account_number]', with: sample.account_number
+  fill_in 'agent[branch_name]', with: sample.branch_name
+  fill_in 'agent[branch_address]', with: sample.branch_address
 end

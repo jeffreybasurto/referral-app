@@ -1,7 +1,16 @@
-nav.navbar.navbar-default
-  .container-fluid
-    .navbar-header
-      = image_tag 'docdoc_logo.png', alt: 'DocDoc Logo', class: 'navbar-brand'
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      ul.nav.navbar-nav.navbar-right
-        li= link_to t('devise.sessions.log_out'), destroy_organisation_session_path, method: :delete
+nav#header
+  .container
+    = image_tag 'docdoc_logo.png', alt: 'DocDoc Logo', id: 'brand-logo'
+    ul#navbar.nav.navbar-nav.navbar-right
+      li.dropdown
+        = link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown', role: 'button' do
+          | English
+          span.caret
+        ul.dropdown-menu.dropdown-menu-left
+          - ApplicationHelper::LOCALES.each do |loc|
+            li= link_to loc, '#'
+        - if organisation_signed_in?
+          li= link_to t('devise.sessions.log_out'), destroy_organisation_session_path, method: :delete
+        - else
+          li= link_to t('devise.sessions.log_in'), new_organisation_session_path
+          li= link_to t('devise.registrations.sign_up'), new_organisation_registration_path

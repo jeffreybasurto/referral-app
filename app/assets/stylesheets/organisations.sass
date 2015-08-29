@@ -1,3 +1,75 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "utilities/variables"
+$border-color: #dddddd
+
+#organisation
+  height: 100%
+
+#basic-info
+  background-color: $background-blue
+  padding: 25px 0
+
+#welcome
+  font-size: 24px
+  color: #086da4
+  font-weight: bold
+
+#invitation-form
+  background-color: #f9f9f9
+  padding: 15px 0
+
+  span
+    display: block
+    overflow: hidden
+    padding-right: 20px
+
+    .form-control
+      width: 100%
+
+#email-stats
+  padding-top: 50px
+
+#entries-info
+  color: $heading-color
+  font-weight: bold
+  line-height: 35px
+  margin-right: 12px
+
+#pagination-nav-links
+  border: 1px solid $border-gray
+  border-radius: 5px
+  background-color: #f9f9f9
+
+  a, span
+    font-size: 20px
+    font-weight: bolder
+    text-align: center
+    line-height: 33px
+    width: 33px
+    display: inline-block
+
+    &:first-child
+      border-right: 1px solid $border-gray
+
+    &.last
+      color: #a0a0a1
+
+    &:hover, &:focus
+      text-decoration: none
+
+#agents-list
+  border: 1px solid $border-gray
+  border-radius: 5px
+  margin-top: 15px
+  padding: 35px 15px
+
+  th
+    font-weight: bold
+
+  .pending, .joined
+    font-weight: bold
+
+    &.pending
+      color: #d03433
+
+    &.joined
+      color: #4ba34c
