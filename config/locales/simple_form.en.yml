@@ -5,6 +5,9 @@ en:
       mark: '*'
     error_notification:
       default_message: "Please review the problems below:"
+    labels:
+      defaults:
+        remember_me: "Remember me"
     placeholders:
       defaults:
         name: "Agency Name"

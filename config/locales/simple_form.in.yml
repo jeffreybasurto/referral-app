@@ -5,6 +5,9 @@ in:
       mark: '*'
     error_notification:
       default_message: "Silahkan memeriksa masalah dibawah ini:"
+    labels:
+      defaults:
+        remember_me: "Ingat saya"
     placeholders:
       defaults:
         name: "Nama Agensi"
