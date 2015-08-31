@@ -1,0 +1,38 @@
+in:
+  devise:
+    mailer:
+      reset_password_instructions:
+        subject: "Petunjuk memperbaharui kata sandi"
+    passwords:
+      new_header: "Perbaharui kata sandi"
+      edit_header: "Ubah kata sandi"
+      save_button: "Simpan"
+      send_button: "Perbaharui"
+      reset_instructions: "Masukkan alamat email Anda di bawah ini dan kami akan mengiriminkan tautan untuk memperbaharui kata sandi Anda"
+      no_token: "Anda tidak dapat masuk ke halaman ini kecuali melalui email perbaharuan kata sandi, harap dipastikan Anda menggunakan URL yang disediakan"
+      send_instructions: "Anda akan menerima email berisi petunjuk untuk memperbaharui kata sandi dalam beberapa menit kemudian"
+      send_paranoid_instructions: "JIka alamat email Anda telah terdaftar didalam database kami, Anda akan menerima tautan untuk memperoleh kembali kata sandi perbaharuan pada email Anda dalam beberapa menit kemudian"
+      updated: "Kata sandi Anda telah berhasil diubah. Anda saat ini masuk"
+      updated_not_active: "Kata sandi Anda telah berhasil diubah"
+    registrations:
+      sign_up_question: "Belum memiliki akun?"
+      sign_up: "Daftar"
+      signed_up: "Selamat datang! Anda berhasil terdaftar"
+      agent_success: "Terima kasih telah mendaftar dengan kami. Sebuah email telah dikirim untuk informasi lebih lanjut"
+    recovers:
+      link: "Lupa kata sandi?"
+    sessions:
+      log_in: "Masuk"
+      log_out: "Keluar"
+      log_in_here: "Masuk disini"
+      log_in_question: "Sudah memiliki akun?"
+      signed_in: "Berhasil masuk"
+      signed_out: "Berhasil keluar"
+      already_signed_out: "Berhasil keluar"
+  errors:
+    messages:
+      expired: "Tidak berlaku, silahkan meminta yang baru"
+      not_found: "tidak ditemukan"
+      not_saved:
+        one: "1 kesalahan mencegah %{resource} untuk disimpan"
+        other: "%{count} kesalahan mencegah %{resource} untuk disimpan"

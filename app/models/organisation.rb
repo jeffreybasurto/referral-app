@@ -9,6 +9,7 @@ class Organisation < ActiveRecord::Base
 
   validates :email, presence: true, uniqueness: true
   validates :referral_token, presence: true, uniqueness: true
+  validates :locale, inclusion: I18n.available_locales.map(&:to_s), allow_blank: true, allow_nil: true
   validates_presence_of :name
 
   before_validation :generate_referral_token

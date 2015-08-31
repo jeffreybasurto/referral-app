@@ -68,8 +68,8 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    expect(page).to have_link(I18n.t('dashboard.referral_link'), href: reveal_referral_token_path)
+    expect(page).to have_link(I18n.t('dashboard.referral_link'), href: reveal_referral_token_path(locale: I18n.locale))
     click_link I18n.t('dashboard.referral_link')
-    expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_url(invitation_token: subject.referral_token)))
+    expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_url(invitation_token: subject.referral_token, locale: I18n.locale)))
   end
 end

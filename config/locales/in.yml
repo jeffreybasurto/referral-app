@@ -1,0 +1,46 @@
+in:
+  app_name: 'DocDoc Referral'
+  errors:
+    messages:
+      improbable_phone: "nomor ini yang tidak valid"
+      404: "Halaman tidak ditemukan"
+  helpers:
+    page_entries_info:
+      one_page:
+        display_entries:
+          zero: "%{entry_name} tidak ditemukan"
+          one: "1 %{entry_name}"
+          other: "%{count} %{entry_name}"
+      more_pages:
+        display_entries: "%{first}-%{last} dari %{total}"
+    submit:
+      organisation:
+        create: "Daftar"
+      agent:
+        create: "Disetujui"
+        update: "Disetujui"
+      invitations:
+        submit: "Mengirim undangan"
+  dashboard:
+    greeting: "Hello %{name} (%{email})."
+    header: "Rujukan"
+    stats:
+      explanation: "Status Anda saat ini adalah : %{sign_ups} %{divider} %{sent}"
+      divider: " / "
+      sign_ups:
+        one: "%{count} daftar"
+        other: "%{count} daftar"
+      sent:
+        one: "%{count} surat terkirim"
+        other: "%{count} surat terkirim"
+    table:
+      headers:
+        email: "Email rujukan"
+        name: "Nama Agent"
+        agent_id: "ID Agent"
+        status: "Status"
+        invitation_statuses:
+          pending: "Pending"
+          joined: "Joined"
+    reveal: "Tautan rujukan Anda adalah %{path}"
+    referral_link: "Mencari tautan rujukan Anda? Anda dapat menemukannya disini"

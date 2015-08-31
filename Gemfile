@@ -45,6 +45,7 @@ gem 'bootstrap3-datetimepicker-rails'
 gem 'i18n-debug', group: :development
 gem 'kaminari'
 gem 'rails_12factor', group: [:staging, :production]
+gem 'i18n-tasks'
 
 group :development, :test do
   gem 'byebug'

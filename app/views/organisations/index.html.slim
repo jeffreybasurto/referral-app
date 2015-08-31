@@ -26,10 +26,10 @@
       table.table.table-striped
         thead
           tr
-            th Referral Email
-            th Agent Name
-            th Agent ID
-            th Status
+            th= t('dashboard.table.headers.email')
+            th= t('dashboard.table.headers.name')
+            th= t('dashboard.table.headers.agent_id')
+            th= t('dashboard.table.headers.status')
         tbody
           - @agents.each do |ref|
             tr

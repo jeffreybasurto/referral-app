@@ -4,11 +4,11 @@ nav#header
     ul#navbar.nav.navbar-nav.navbar-right
       li.dropdown
         = link_to '#', class: 'dropdown-toggle', 'data-toggle' => 'dropdown', role: 'button' do
-          | English
+          = ApplicationHelper::LOCALES[I18n.locale]
           span.caret
         ul.dropdown-menu.dropdown-menu-left
-          - ApplicationHelper::LOCALES.each do |loc|
-            li= link_to loc, '#'
+          - ApplicationHelper::LOCALES.each do |locale, name|
+            li= link_to name, locale_path(new_locale: locale), method: :patch
         - if organisation_signed_in?
           li= link_to t('devise.sessions.log_out'), destroy_organisation_session_path, method: :delete
         - else

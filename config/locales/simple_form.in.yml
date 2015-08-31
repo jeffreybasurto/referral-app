@@ -1,0 +1,24 @@
+in:
+  simple_form:
+    required:
+      text: 'required'
+      mark: '*'
+    error_notification:
+      default_message: "Silahkan memeriksa masalah dibawah ini:"
+    placeholders:
+      defaults:
+        name: "Nama Agensi"
+        password: "Kata sandi"
+        emails: "Alamat email rujukan"
+        email: "Alamat email"
+        first_name: "Nama Depan"
+        last_name: "Nama Keluarga"
+        password_confirmation: "Konfirmasi kata sandi"
+        phone: "Nomor telepon"
+        dob: "Tanggal lahir"
+        insurance_company_name: "Perusahaan Asuransi"
+        bank_name: "Nama Bank"
+        account_name: "Nama Akun Bank"
+        branch_name: "Nama Cabang Bank"
+        branch_address: "Alamat Cabang Bank"
+        account_number: "Nomor rekening"

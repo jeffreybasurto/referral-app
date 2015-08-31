@@ -1,3 +1,6 @@
 module ApplicationHelper
-  LOCALES = %w(English Bahasa)
+  LOCALES = {
+    en: 'English',
+    in: 'Bahasa'
+  }
 end

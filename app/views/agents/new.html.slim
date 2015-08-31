@@ -1,7 +1,16 @@
-h2= t 'devise.invitations.edit.header'
+#sign-up
+  .panel.panel-default
+    .panel-heading
+      h1.panel-title= @agent.organisation_name
 
-= simple_form_for @agent, url: agent_path, html: { method: :post } do |f|
-  = f.error_notification
-  = f.hidden_field :organisation_id
-  = f.input :email, required: true, as: :email
-  = render partial: 'agents/fields', locals: { f: f }
+    .panel-body
+      = simple_form_for @agent, url: agent_path, html: { method: :post } do |f|
+        .form-header= t('devise.registrations.sign_up')
+        .form-inputs
+          = f.error_notification
+          = f.hidden_field :organisation_id
+          = f.input :email, required: true, as: :email
+          = render partial: 'agents/fields', locals: { f: f }
+
+        .form-actions
+          = f.button :submit, class: 'btn-warning'

@@ -13,6 +13,8 @@ class Agent < ActiveRecord::Base
   validates_plausible_phone :phone, presence: true, default_country_code: 'ID'
   validate :dob_valid?
 
+  delegate :name, to: :organisation, prefix: true
+
   before_validation :generate_agent_id
 
   attr_accessor :password #to make devise_invitable happy

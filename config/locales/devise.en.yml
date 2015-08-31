@@ -24,10 +24,10 @@ en:
     recovers:
       link: "Forgot your password?"
     sessions:
-      log_in: "Login"
-      log_out: "Logout"
       log_in_here: "Login here"
       log_in_question: "Already have an account?"
+      log_in: "Login"
+      log_out: "Logout"
       signed_in: "Signed in successfully."
       signed_out: "Signed out successfully."
       already_signed_out: "Signed out successfully."
