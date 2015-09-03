@@ -1,4 +1,4 @@
-in:
+id:
   devise:
     mailer:
       invitation_instructions:

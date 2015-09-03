@@ -1,9 +1,9 @@
-in:
+id:
   app_name: 'DocDoc Referral'
   errors:
     messages:
       improbable_phone: "nomor ini yang tidak valid"
-      404: "Halaman tidak ditemukan"
+      page_not_found: "Halaman tidak ditemukan"
   helpers:
     page_entries_info:
       one_page:

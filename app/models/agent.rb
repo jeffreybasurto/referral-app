@@ -23,10 +23,6 @@ class Agent < ActiveRecord::Base
     last_name.present? ? "#{first_name} #{last_name}" : first_name
   end
 
-  def send_intro_email
-    #TODO
-  end
-
   private
   def dob_valid?
     begin

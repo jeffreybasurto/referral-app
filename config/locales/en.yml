@@ -3,7 +3,7 @@ en:
   errors:
     messages:
       improbable_phone: "is an invalid number"
-      404: "Page not found"
+      page_not_found: "Page not found"
   helpers:
     page_entries_info:
       one_page:

@@ -1,20 +1,23 @@
 Rails.application.routes.draw do
-  scope '(:locale)', locale: /#{I18n.available_locales.join('|')}/ do
-    devise_for :agents, only: :invitations
-    devise_for :organisations
+  filter :locale
 
-    devise_scope :organisation do
-      root 'organisations#index', as: :organisation_root
-    end
+  devise_for :organisations
+  devise_for :agents, only: :invitations
 
-    root 'devise/sessions#new'
-
-    resources :organisations, only: [:index]
-    resources :invitations, only: [:create]
-    resource :agent, only: %i(new create)
-    resource :locale, only: [:update]
-    get 'reveal_referral_token', to: 'organisations#reveal_referral_link'
+  resources :organisations, only: [:index] do
+    filter :pagination
   end
 
-  get '', to: redirect("/#{I18n.locale}", status: 302)
+  get 'reveal_referral_token', to: 'organisations#reveal_referral_link'
+
+  devise_scope :organisation do
+    root 'organisations#index', as: :organisation_root
+  end
+
+  resources :invitations, only: [:create]
+  resource :agents, only: %i(new create) do
+    match :create, via: %i(get post) #allow GET create to support locale switching after submit
+  end
+
+  root 'devise/sessions#new'
 end

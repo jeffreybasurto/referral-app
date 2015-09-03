@@ -14,4 +14,22 @@ RSpec.describe AgentsController, type: :controller do
       expect(assigns[:agent].organisation_id).to eq org.id
     end
   end
+
+  describe 'POST create' do
+    context 'valid params' do
+      let(:params) { build(:agent).attributes }
+
+      it 'creates a new agent' do
+        expect {
+          post :create, invitation_token: referral_token, agent: params
+        }.to change(Agent, :count).by(1)
+      end
+
+      it 'renders text' do
+        post :create, invitation_token: referral_token, agent: params
+
+        expect(response.body).to eq I18n.t('devise.registrations.agent_success')
+      end
+    end
+  end
 end

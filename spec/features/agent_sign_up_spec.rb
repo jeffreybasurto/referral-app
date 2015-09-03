@@ -17,12 +17,11 @@ RSpec.feature 'Agents registration', type: :feature do
   end
 
   scenario 'Agent sign up from link' do
-    visit new_agent_path(invitation_token: org.referral_token)
+    visit new_agents_path(invitation_token: org.referral_token)
 
     fill_in 'Email', with: sample.email
     fill_in_common_fields
 
-    expect_any_instance_of(Agent).to receive(:send_intro_email)
     expect {
       click_button I18n.t('helpers.submit.agent.create')
     }.to change(Agent.invitation_accepted, :count).by(1)

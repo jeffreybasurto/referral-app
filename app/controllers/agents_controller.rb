@@ -8,14 +8,18 @@ class AgentsController < ApplicationController
 
   def create
     @agent = Agent.new(agent_params.merge(invitation_sent_at: Time.current - 5.minutes, invitation_accepted_at: Time.current))
-    #set invitation_sent_at will increment the created_by_invitation count, used for analytics
-    #set invitation_accepted_at will increment the invitation_accepted count, used for analytics
 
-    if @agent.save
-      @agent.send_intro_email
-      render text: I18n.t('devise.registrations.agent_success')
-    else
+    if request.get? #should only happen if user change locale after submit
       render 'new'
+    else
+      #set invitation_sent_at will increment the created_by_invitation count, used for analytics
+      #set invitation_accepted_at will increment the invitation_accepted count, used for analytics
+
+      if @agent.save
+        render text: I18n.t('devise.registrations.agent_success')
+      else
+        render 'new'
+      end
     end
   end
 
@@ -27,6 +31,6 @@ class AgentsController < ApplicationController
 
   def fetch_organisation
     @organisation = Organisation.where(referral_token: params['invitation_token']).first
-    raise ActionController::RoutingError.new(I18n.t('errors.messages.404')) unless @organisation.present?
+    raise ActiveRecord::RecordNotFound.new(I18n.t('errors.messages.page_not_found')) unless @organisation.present?
   end
 end

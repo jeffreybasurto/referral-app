@@ -5,18 +5,15 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_organisation!
   before_filter :set_locale
 
-  def after_sign_in_path_for(resource_or_scope)
-    if resource_or_scope.is_a?(Organisation) && resource_or_scope.locale !=  I18n.locale
-      I18n.locale = resource_or_scope.locale
-      organisations_path
-    else
-      super
-    end
-  end
-
   protected
   def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
+    url_options = { locale: I18n.locale }.merge options
+
+    if organisation_signed_in? && current_organisation.locale != url_options[:locale].to_s && I18n.available_locales.map(&:to_s).include?(url_options[:locale].to_s)
+      current_organisation.update_attribute(:locale, url_options[:locale])
+    end
+
+    url_options
   end
 
   def devise_parameter_sanitizer

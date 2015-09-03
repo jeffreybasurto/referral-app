@@ -8,7 +8,7 @@ nav#header
           span.caret
         ul.dropdown-menu.dropdown-menu-left
           - ApplicationHelper::LOCALES.each do |locale, name|
-            li= link_to name, locale_path(new_locale: locale), method: :patch
+            li= link_to name, url_for(params.merge(locale: locale))
         - if organisation_signed_in?
           li= link_to t('devise.sessions.log_out'), destroy_organisation_session_path, method: :delete
         - else
