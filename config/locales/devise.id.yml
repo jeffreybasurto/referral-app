@@ -18,7 +18,7 @@ id:
       sign_up_question: "Belum memiliki akun?"
       sign_up: "Daftar"
       signed_up: "Selamat datang! Anda berhasil terdaftar"
-      agent_success: "Terima kasih telah mendaftar dengan kami. Sebuah email telah dikirim untuk informasi lebih lanjut"
+      agent_success: "Terima kasih telah bergabung dengan kami. ID Agent Anda adalah <b>%{id}</b>."
     recovers:
       link: "Lupa kata sandi?"
     sessions:

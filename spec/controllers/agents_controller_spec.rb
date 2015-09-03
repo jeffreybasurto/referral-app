@@ -28,7 +28,7 @@ RSpec.describe AgentsController, type: :controller do
       it 'renders text' do
         post :create, invitation_token: referral_token, agent: params
 
-        expect(response.body).to eq I18n.t('devise.registrations.agent_success')
+        expect(response).to redirect_to(finished_agents_path(agent_id: Agent.last.agent_id))
       end
     end
   end

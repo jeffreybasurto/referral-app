@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :invitations, only: [:create]
   resource :agents, only: %i(new create) do
     match :create, via: %i(get post) #allow GET create to support locale switching after submit
+    get :finished
   end
 
   root 'devise/sessions#new'

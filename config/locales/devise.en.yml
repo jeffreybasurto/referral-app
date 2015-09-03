@@ -19,7 +19,7 @@ en:
     registrations:
       sign_up: "Sign up"
       signed_up: "Welcome! You have signed up successfully."
-      agent_success: "Thank you for registering with us. An email has been sent with more information."
+      agent_success: "Thank you for registering with us. Your Agent ID is <b>%{id}</b>."
       sign_up_question: "Don’t have an account?"
     recovers:
       link: "Forgot your password?"

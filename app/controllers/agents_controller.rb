@@ -16,11 +16,15 @@ class AgentsController < ApplicationController
       #set invitation_accepted_at will increment the invitation_accepted count, used for analytics
 
       if @agent.save
-        render text: I18n.t('devise.registrations.agent_success')
+        redirect_to finished_agents_path(agent_id: @agent.agent_id)
       else
         render 'new'
       end
     end
+  end
+
+  def finished
+    @agent_id = params[:agent_id]
   end
 
   private
