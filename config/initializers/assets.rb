@@ -12,7 +12,7 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  devise/sessions.css
                                                  devise/invitations.css
-                                                 devise_invitable/registrations.css
+                                                 devise/registrations.css
                                                  organisations.css
                                                  agents.css
 )

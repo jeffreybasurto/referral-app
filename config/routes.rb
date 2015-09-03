@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   filter :locale
 
-  devise_for :organisations
+  devise_for :organisations, controllers: { registrations: 'devise/registrations' }
   devise_for :agents, only: :invitations
 
   resources :organisations, only: [:index] do
