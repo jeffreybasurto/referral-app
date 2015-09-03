@@ -78,6 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_mailer.default_url_options = { host: ENV['host'], protocol: ENV['protocol'] }
+  config.action_mailer.asset_host = ENV['host']
 
   config.action_mailer.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
