@@ -44,6 +44,7 @@ gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 # gem 'i18n-debug', group: :development
 gem 'kaminari'
+gem 'activeadmin', github: 'activeadmin'
 gem 'rails_12factor', group: [:staging, :production]
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
 gem 'i18n-tasks'

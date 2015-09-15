@@ -16,4 +16,4 @@ end
 
 5.times do |i|
   Agent.invite!({ email: "test#{i + 5}@example.com", skip_invitation: true }, org).update_attribute(:invitation_sent_at, 10.hours.ago)
-end
+endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')

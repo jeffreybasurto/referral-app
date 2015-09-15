@@ -26,3 +26,7 @@ module Referral
     config.i18n.available_locales = [:id, :en]
   end
 end
+
+ActiveAdmin.setup do |config|
+  config.comments = false
+end
