@@ -4,7 +4,7 @@ class OrganisationsController < ApplicationController
   end
 
   def reveal_referral_link
-    @referral_token = current_organisation.referral_token
+    @referral_token = current_organisation.gen_ref_token_for_link
 
     render 'reveal'
   end

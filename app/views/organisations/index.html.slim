@@ -5,7 +5,7 @@
 
       h3= t('dashboard.header')
 
-      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.mails_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.mails_sent))
+      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.invitations_accepted.count), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.invitations_sent.count))
 
   = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
     .container
@@ -36,9 +36,11 @@
               td= mail_to ref.email
               td= ref.name
               td= ref.agent_id
+              - if ref.invitation_sent_at.nil? #not created by invite, must be from referral link
+                td.joined= t('dashboard.table.headers.invitation_statuses.joined_via_link')
               - if ref.invitation_accepted_at.nil?
                 td.pending= t('dashboard.table.headers.invitation_statuses.pending')
               - else
-                td.joined= t('dashboard.table.headers.invitation_statuses.joined')
+                td.joined= t('dashboard.table.headers.invitation_statuses.joined_via_mail')
 
     p= link_to t('dashboard.referral_link'), reveal_referral_token_path

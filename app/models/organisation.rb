@@ -21,12 +21,21 @@ class Organisation < ActiveRecord::Base
     end
   end
 
-  def mails_sent
-    self.agents.created_by_invite.count
+  def gen_ref_token_for_link
+    self.increment!(:ref_link_generated_count)
+    self.referral_token
   end
 
-  def mails_accepted
-    self.agents.invitation_accepted.count
+  def invitations_sent
+    self.agents.created_by_invite
+  end
+
+  def invitations_accepted
+    self.agents.invitation_accepted
+  end
+
+  def agents_via_ref_link
+    self.agents.where(invitation_sent_at: nil, invitation_token: nil)
   end
 
   private

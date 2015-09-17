@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915050804) do
+ActiveRecord::Schema.define(version: 20150917030143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,21 +81,22 @@ ActiveRecord::Schema.define(version: 20150915050804) do
   add_index "agents", ["invited_by_id"], name: "index_agents_on_invited_by_id", using: :btree
 
   create_table "organisations", force: :cascade do |t|
-    t.string   "name",                   default: "", null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.string   "name",                     default: "", null: false
+    t.string   "email",                    default: "", null: false
+    t.string   "encrypted_password",       default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",            default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.string   "referral_token"
     t.string   "locale"
+    t.integer  "ref_link_generated_count", default: 0
   end
 
   add_index "organisations", ["email"], name: "index_organisations_on_email", unique: true, using: :btree

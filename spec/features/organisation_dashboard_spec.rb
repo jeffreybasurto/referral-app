@@ -8,6 +8,7 @@ RSpec.feature 'Organisation dashboard', type: :feature do
   let(:agent_2_params) { build(:agent) }
   let!(:agent_1) { Agent.invite!({ email: agent_1_params.email, skip_invitation: true }, subject) }
   let!(:agent_2) { Agent.invite!({ email: agent_2_params.email, skip_invitation: true }, subject) }
+  let!(:agent_3) { create(:agent, organisation: subject) }
 
   before do
     params = agent_1_params.attributes.symbolize_keys.slice(:bank_name, :insurance_company_name, :first_name, :last_name, :phone, :dob, :account_name, :account_number, :branch_name).merge(invitation_token: agent_1.raw_invitation_token)
@@ -39,16 +40,21 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    expect(page).to have_content I18n.t('dashboard.stats.explanation', sign_ups: I18n.t('dashboard.stats.sign_ups', count: subject.mails_accepted), divider: I18n.t('dashboard.stats.divider'), sent: I18n.t('dashboard.stats.sent', count: subject.mails_sent))
+    expect(page).to have_content I18n.t('dashboard.stats.explanation', sign_ups: I18n.t('dashboard.stats.sign_ups', count: subject.invitations_accepted.count), divider: I18n.t('dashboard.stats.divider'), sent: I18n.t('dashboard.stats.sent', count: subject.invitations_sent.count))
 
     within 'tbody tr:nth-child(1)' do
       expect(page).to have_content agent_1_params.email
-      expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.joined')
+      expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.joined_via_mail')
     end
 
     within 'tbody tr:nth-child(2)' do
       expect(page).to have_content agent_2_params.email
       expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.pending')
+    end
+
+    within 'tbody tr:nth-child(3)' do
+      expect(page).to have_content agent_3.email
+      expect(page).to have_content I18n.t('dashboard.table.headers.invitation_statuses.joined_via_link')
     end
   end
 

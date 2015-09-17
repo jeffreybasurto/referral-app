@@ -41,6 +41,7 @@ id:
         status: "Status"
         invitation_statuses:
           pending: "Pending"
-          joined: "Joined"
+          joined_via_mail: "Joined (Email)"
+          joined_via_link: "Joined (Tautan)"
     reveal: "Tautan rujukan Anda adalah %{path}"
     referral_link: "Mencari tautan rujukan Anda? Anda dapat menemukannya disini"
