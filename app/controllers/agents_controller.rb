@@ -7,14 +7,11 @@ class AgentsController < ApplicationController
   end
 
   def create
-    @agent = Agent.new(agent_params.merge(invitation_sent_at: Time.current - 5.minutes, invitation_accepted_at: Time.current))
+    @agent = Agent.new(agent_params)
 
     if request.get? #should only happen if user change locale after submit
       render 'new'
     else
-      #set invitation_sent_at will increment the created_by_invitation count, used for analytics
-      #set invitation_accepted_at will increment the invitation_accepted count, used for analytics
-
       if @agent.save
         redirect_to finished_agents_path(agent_id: @agent.agent_id)
       else
