@@ -5,7 +5,7 @@ ActiveAdmin.register Agent do
     column :email
     column :organisation_name
     column 'Status' do |a|
-      a.invitation_accepted_at.nil? ? 'Pending' : 'Joined'
+      a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
     end
     actions
   end
@@ -30,7 +30,7 @@ ActiveAdmin.register Agent do
       end
 
       row 'Status' do |a|
-        a.invitation_accepted_at.nil? ? 'Pending' : 'Joined'
+        a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
       end
     end
   end
