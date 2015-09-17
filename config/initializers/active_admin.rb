@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Referral"
+  config.site_title = 'Referral App'
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -55,6 +55,7 @@ ActiveAdmin.setup do |config|
   # This setting changes the method which Active Admin calls
   # within the application controller.
   config.authentication_method = :authenticate_admin_user!
+  config.skip_before_filter :authenticate_organisation!
 
   # == User Authorization
   #
