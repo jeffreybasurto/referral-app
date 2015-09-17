@@ -32,12 +32,16 @@ class ApplicationController < ActionController::Base
 
   private
   def set_locale
-    I18n.locale = if params[:locale]
-      params[:locale]
-    elsif organisation_signed_in?
-      current_organisation.locale
+    if admin_user_signed_in?
+      I18n.locale = :en
     else
-      I18n.default_locale
+      I18n.locale = if params[:locale]
+        params[:locale]
+      elsif organisation_signed_in?
+        current_organisation.locale
+      else
+        I18n.default_locale
+      end
     end
   end
 end
