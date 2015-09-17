@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
-  filter :locale
+  filter :locale, :exclude => /^\/admin/
 
   devise_for :organisations, controllers: { registrations: 'devise/registrations' }
   devise_for :agents, only: :invitations
