@@ -5,7 +5,9 @@ ActiveAdmin.register Agent do
   index do
     column :id
     column :email
-    column :organisation_id
+    column 'Organisation ID' do |a|
+      a.organisation_id
+    end
     column :organisation_name
     column 'Status' do |a|
       a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
