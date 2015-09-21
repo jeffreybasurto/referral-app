@@ -40,7 +40,7 @@ RSpec.feature 'Organisation dashboard', type: :feature do
     login_as(subject, :scope => :organisation)
     visit root_path
 
-    expect(page).to have_content I18n.t('dashboard.stats.explanation', sign_ups: I18n.t('dashboard.stats.sign_ups', count: subject.invitations_accepted.count), divider: I18n.t('dashboard.stats.divider'), sent: I18n.t('dashboard.stats.sent', count: subject.invitations_sent.count))
+    expect(page).to have_content I18n.t('dashboard.stats.explanation', sign_ups: I18n.t('dashboard.stats.sign_ups', count: subject.invitations_accepted), divider: I18n.t('dashboard.stats.divider'), sent: I18n.t('dashboard.stats.sent', count: subject.unique_mails_sent))
 
     within 'tbody tr:nth-child(1)' do
       expect(page).to have_content agent_1_params.email

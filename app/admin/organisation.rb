@@ -1,12 +1,33 @@
 ActiveAdmin.register Organisation do
+  config.sort_order = 'id_asc'
   permit_params :name, :email, :password, :password_confirmation
 
   actions :index, :show
 
   index do
+    column :id
     column :name
     column :email
     column :referral_token
+    column 'Emails sent' do |org|
+      org.mails_sent
+    end
+    column 'Unique emails sent' do |org|
+      org.unique_mails_sent
+    end
+    column 'Number of pending agents' do |org|
+      org.agents.invitation_not_accepted.count
+    end
+    column 'Number of agents joined (email)' do |org|
+      org.invitations_accepted
+    end
+    column 'Number of agents joined (link)' do |org|
+      org.agents_via_ref_link
+    end
+    column 'Referral links generated' do |org|
+      org.ref_link_generated_count
+    end
+
     actions
   end
 
@@ -24,17 +45,23 @@ ActiveAdmin.register Organisation do
 
   sidebar 'Stats', only: :show do
     attributes_table do
-      row 'Agents invited via email' do
-        organisation.invitations_sent.count
+      row 'Emails sent' do |org|
+        org.mails_sent
       end
-      row 'Agents joined via email' do
-        organisation.invitations_accepted.count
+      row 'Unique emails sent' do |org|
+        org.unique_mails_sent
       end
-      row 'Agents joined via referral link' do
-        organisation.agents_via_ref_link.count
+      row 'Number of pending agents' do |org|
+        org.agents.invitation_not_accepted.count
       end
-      row 'Referral links generated' do
-        organisation.ref_link_generated_count
+      row 'Number of agents joined (email)' do |org|
+        org.invitations_accepted
+      end
+      row 'Number of agents joined (link)' do |org|
+        org.agents_via_ref_link
+      end
+      row 'Referral links generated' do |org|
+        org.ref_link_generated_count
       end
     end
   end

@@ -71,7 +71,7 @@ RSpec.describe Organisation, type: :model do
     end
   end
 
-  describe '#invitations_sent' do
+  describe '#unique_mails_sent' do
     subject { create :organisation }
 
     before do
@@ -83,7 +83,21 @@ RSpec.describe Organisation, type: :model do
     end
 
     it 'returns agent invitations' do
-      expect(subject.invitations_sent.count).to eq 2
+      expect(subject.unique_mails_sent).to eq 2
+    end
+  end
+
+  describe '#mails_sent' do
+    subject { create :organisation }
+
+    before do
+      subject.invite_all(['test@test.com'])
+      subject.invite_all(['test@test.com'])
+    end
+
+    it 'returns agent invitations' do
+      expect(subject.mails_sent).to eq 2
+      expect(subject.unique_mails_sent).to eq 1
     end
   end
 
@@ -99,7 +113,7 @@ RSpec.describe Organisation, type: :model do
     end
 
     it 'returns agents who accepted invitation' do
-      expect(subject.invitations_accepted.count).to eq 2
+      expect(subject.invitations_accepted).to eq 2
     end
   end
 
@@ -114,7 +128,7 @@ RSpec.describe Organisation, type: :model do
     end
 
     it 'returns agents who signed up from static referral link' do
-      expect(subject.agents_via_ref_link.count).to eq 2
+      expect(subject.agents_via_ref_link).to eq 2
     end
   end
 end

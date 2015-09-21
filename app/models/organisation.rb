@@ -18,6 +18,7 @@ class Organisation < ActiveRecord::Base
   def invite_all(emails = [])
     emails.each do |email|
       Agent.invite!({ email: email }, self)
+      self.increment!(:mails_sent)
     end
   end
 
@@ -26,16 +27,16 @@ class Organisation < ActiveRecord::Base
     self.referral_token
   end
 
-  def invitations_sent
-    self.agents.created_by_invite
+  def unique_mails_sent
+    self.agents.created_by_invite.count
   end
 
   def invitations_accepted
-    self.agents.invitation_accepted
+    self.agents.invitation_accepted.count
   end
 
   def agents_via_ref_link
-    self.agents.where(invitation_sent_at: nil, invitation_token: nil)
+    self.agents.where(invitation_sent_at: nil, invitation_token: nil).count
   end
 
   private

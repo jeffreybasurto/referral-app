@@ -5,7 +5,7 @@
 
       h3= t('dashboard.header')
 
-      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.invitations_accepted.count), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.invitations_sent.count))
+      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.invitations_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.unique_mails_sent))
 
   = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
     .container

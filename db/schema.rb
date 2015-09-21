@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150917030143) do
+ActiveRecord::Schema.define(version: 20150918030159) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,6 +97,7 @@ ActiveRecord::Schema.define(version: 20150917030143) do
     t.string   "referral_token"
     t.string   "locale"
     t.integer  "ref_link_generated_count", default: 0
+    t.integer  "mails_sent",               default: 0
   end
 
   add_index "organisations", ["email"], name: "index_organisations_on_email", unique: true, using: :btree

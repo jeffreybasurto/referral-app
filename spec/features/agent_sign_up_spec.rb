@@ -13,7 +13,7 @@ RSpec.feature 'Agents registration', type: :feature do
 
     expect {
       click_button I18n.t('helpers.submit.agent.update')
-    }.to change(org.invitations_accepted, :count).by(1)
+    }.to change(org, :invitations_accepted).by(1)
   end
 
   scenario 'Agent sign up from link' do
@@ -24,7 +24,7 @@ RSpec.feature 'Agents registration', type: :feature do
 
     expect {
       click_button I18n.t('helpers.submit.agent.create')
-    }.to change(org.agents_via_ref_link, :count).by(1)
+    }.to change(org, :agents_via_ref_link).by(1)
   end
 end
 
