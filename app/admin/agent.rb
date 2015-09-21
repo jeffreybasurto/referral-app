@@ -1,8 +1,11 @@
 ActiveAdmin.register Agent do
+  config.sort_order = 'id_asc'
   actions :index, :show
 
   index do
+    column :id
     column :email
+    column :organisation_id
     column :organisation_name
     column 'Status' do |a|
       a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
