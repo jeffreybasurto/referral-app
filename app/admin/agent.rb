@@ -15,6 +15,18 @@ ActiveAdmin.register Agent do
     actions
   end
 
+  csv do
+    column :id
+    column :email
+    column 'Organisation ID' do |a|
+      a.organisation_id
+    end
+    column :organisation_name
+    column 'Status' do |a|
+      a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
+    end
+  end
+
   show do
     attributes_table_for agent do
       row :email
