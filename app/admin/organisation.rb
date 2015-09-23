@@ -31,6 +31,31 @@ ActiveAdmin.register Organisation do
     actions
   end
 
+  csv do
+    column :id
+    column :name
+    column :email
+    column :referral_token
+    column 'Emails sent' do |org|
+      org.mails_sent
+    end
+    column 'Unique emails sent' do |org|
+      org.unique_mails_sent
+    end
+    column 'Number of pending agents' do |org|
+      org.agents.invitation_not_accepted.count
+    end
+    column 'Number of agents joined (email)' do |org|
+      org.invitations_accepted
+    end
+    column 'Number of agents joined (link)' do |org|
+      org.agents_via_ref_link
+    end
+    column 'Referral links generated' do |org|
+      org.ref_link_generated_count
+    end
+  end
+
   filter :email
   filter :name
 
