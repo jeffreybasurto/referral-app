@@ -32,10 +32,9 @@ ActiveAdmin.register Organisation do
   end
 
   csv do
-    column :id
-    column :name
-    column :email
-    column :referral_token
+    (Organisation.column_names - %w(encrypted_password reset_password_token reset_password_sent_at remember_created_at ref_link_generated_count mails_sent)).each do |c|
+      column c.to_sym
+    end
     column 'Emails sent' do |org|
       org.mails_sent
     end
