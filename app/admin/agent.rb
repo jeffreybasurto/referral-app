@@ -4,6 +4,7 @@ ActiveAdmin.register Agent do
 
   index do
     column :id
+    column :agent_id
     column :email
     column 'Organisation ID' do |a|
       a.organisation_id
@@ -16,8 +17,13 @@ ActiveAdmin.register Agent do
   end
 
   csv do
-    column :id
-    column :email
+    config.sort_order = 'agent_id_asc'
+    (Agent.column_names - %w(agent_id organisation_id)).each do |c|
+      column c.to_sym
+    end
+    column 'Agent ID' do |a|
+      a.agent_id
+    end
     column 'Organisation ID' do |a|
       a.organisation_id
     end
