@@ -49,6 +49,8 @@ gem 'rails_12factor', group: [:staging, :production]
 gem 'rails-i18n', github: 'svenfuchs/rails-i18n', branch: 'master'
 gem 'i18n-tasks'
 gem 'routing-filter'
+gem 'select2-rails', '~> 3.5.9'
+gem 'activeadmin_addons'
 
 group :development, :test do
   gem 'byebug'

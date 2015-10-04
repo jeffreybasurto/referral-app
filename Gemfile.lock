@@ -47,6 +47,10 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.2)
+    activeadmin_addons (0.2.7)
+      rails (>= 4)
+      railties
+      select2-rails
     activejob (4.2.4)
       activesupport (= 4.2.4)
       globalid (>= 0.3.0)
@@ -262,6 +266,8 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    select2-rails (3.5.9.3)
+      thor (~> 0.14)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
     simple_form (3.1.1)
@@ -329,6 +335,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin!
+  activeadmin_addons
   bootstrap-sass
   bootstrap3-datetimepicker-rails
   byebug
@@ -354,6 +361,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  select2-rails (~> 3.5.9)
   shoulda-matchers
   simple_form
   simplecov
