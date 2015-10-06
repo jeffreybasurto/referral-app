@@ -12,9 +12,6 @@ RSpec.describe Agent, type: :model do
     it { should validate_presence_of :first_name }
     it { should validate_presence_of :phone }
     it { should validate_presence_of :dob }
-    it { should validate_presence_of :account_name }
-    it { should validate_presence_of :account_number }
-    it { should validate_presence_of :branch_name }
   end
 
   describe '#generate_agent_id' do

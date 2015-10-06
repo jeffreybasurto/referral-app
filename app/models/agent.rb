@@ -7,9 +7,9 @@ class Agent < ActiveRecord::Base
   devise :invitable
 
   validates :email, presence: true, uniqueness: true
-  validates :bank_name, presence: true, inclusion: BANK_NAMES
+  validates :bank_name, inclusion: BANK_NAMES, allow_blank: true
   validates :insurance_company_name, presence: true, inclusion: INSURANCE_COMPANIES
-  validates_presence_of :first_name, :phone, :dob, :organisation, :account_name, :account_number, :branch_name
+  validates_presence_of :first_name, :phone, :dob, :organisation
   validates_plausible_phone :phone, presence: true, default_country_code: 'ID'
   validate :dob_valid?
 

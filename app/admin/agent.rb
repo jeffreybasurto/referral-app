@@ -76,11 +76,11 @@ ActiveAdmin.register Agent do
       f.input :phone, as: :phone, required: true
       f.input :dob, as: :date_picker, required: true
       f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, required: true
-      f.input :bank_name, as: :radio, collection: Agent::BANK_NAMES, required: true
-      f.input :account_name, required: true
-      f.input :branch_name, required: true
+      f.input :bank_name, as: :radio, collection: Agent::BANK_NAMES
+      f.input :account_name
+      f.input :branch_name
       f.input :branch_address
-      f.input :account_number, required: true
+      f.input :account_number
     end
 
     actions

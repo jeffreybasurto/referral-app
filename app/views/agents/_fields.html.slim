@@ -6,11 +6,11 @@
 .form-group
   = f.label :bank_name
   .input-group
-    = f.collection_radio_buttons :bank_name, Agent::BANK_NAMES, :to_s, :to_s, required: true, item_wrapper_class: 'radio-inline'
-= f.input :account_name, required: true
-= f.input :branch_name, required: true
+    = f.collection_radio_buttons :bank_name, Agent::BANK_NAMES, :to_s, :to_s, item_wrapper_class: 'radio-inline'
+= f.input :account_name
+= f.input :branch_name
 = f.input :branch_address
-= f.input :account_number, required: true
+= f.input :account_number
 
 coffee:
   $(->
