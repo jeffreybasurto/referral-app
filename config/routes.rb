@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
+  devise_for :agents, controllers: { registrations: 'agents/registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   filter :locale, :exclude => /^\/admin/
 
   devise_for :organisations, controllers: { registrations: 'devise/registrations' }
-  devise_for :agents, only: :invitations
 
   resources :organisations, only: [:index] do
     filter :pagination
@@ -17,10 +17,6 @@ Rails.application.routes.draw do
   end
 
   resources :invitations, only: [:create]
-  resource :agents, only: %i(new create) do
-    match :create, via: %i(get post) #allow GET create to support locale switching after submit
-    get :finished
-  end
 
   root 'devise/sessions#new'
 end

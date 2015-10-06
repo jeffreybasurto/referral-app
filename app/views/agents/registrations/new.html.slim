@@ -1,10 +1,10 @@
 #sign-up
   .panel.panel-default
     .panel-heading
-      h1.panel-title= @agent.organisation_name
+      h1.panel-title= resource.organisation_name
 
     .panel-body
-      = simple_form_for @agent, url: agents_path, html: { method: :post } do |f|
+      = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
         .form-header= t('devise.registrations.sign_up')
         .form-inputs
           = f.error_notification

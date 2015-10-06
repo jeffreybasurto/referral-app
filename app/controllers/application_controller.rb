@@ -5,10 +5,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_organisation!
   before_filter :set_locale
 
-  def after_accept_path_for(resource)
-    finished_agents_path(agent_id: resource.agent_id)
-  end
-
   protected
   def default_url_options(options = {})
     url_options = { locale: I18n.locale }.merge options

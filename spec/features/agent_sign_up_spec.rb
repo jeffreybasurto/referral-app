@@ -17,7 +17,7 @@ RSpec.feature 'Agents registration', type: :feature do
   end
 
   scenario 'Agent sign up from link' do
-    visit new_agents_path(invitation_token: org.referral_token)
+    visit new_agent_registration_path(invitation_token: org.referral_token)
 
     fill_in 'Email', with: sample.email
     fill_in_common_fields
@@ -28,7 +28,10 @@ RSpec.feature 'Agents registration', type: :feature do
   end
 end
 
+private
 def fill_in_common_fields
+  fill_in 'agent[password]', with: 'password'
+  fill_in 'agent[password_confirmation]', with: 'password'
   fill_in 'agent[first_name]', with: sample.first_name
   fill_in 'agent[last_name]', with: sample.last_name
   fill_in 'agent[phone]', with: sample.phone

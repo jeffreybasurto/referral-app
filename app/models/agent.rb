@@ -1,11 +1,16 @@
 class Agent < ActiveRecord::Base
+  default_scope { order('id ASC') }
+
   BANK_NAMES          = %w(BCA Mandiri)
   INSURANCE_COMPANIES = %w(ACE\ LIFE\ ASSURANCE ADISARANA\ WANAARTHA AIA\ FINANCIAL ALLIANZ\ LIFE\ INDONESIA AVIVA\ INDONESIA AVRIST\ ASSURANCE AXA\ FINANCIAL\ INDONESIA AXA\ LIFE\ INDONESIA AXA\ MANDIRI\ FINANCIALSERVICES BAKRIE\ LIFE BNI\ LIFE\ INSURANCE BRINGIN\ JIWA\ SEJAHTERA BUMIPUTERA\ 1912 CENTRAL\ ASIA\ FINANCIAL CENTRAL\ ASIA\ RAYA CIGNA CIMB\ SUN\ LIFE COMMONWEALTH\ LIFE EQUITY\ LIFE\ INDONESIA FINANCIAL\ WIRAMITRA\ DANADYAKSA GENERALI\ INDONESIA GREAT\ EASTERN\ LIFE\ INDONESIA HANWHA\ LIFE\ INSURANCE\ INDONESIA HEKSA\ EKA\ LIFE\ INSURANCE INDOLIFE\ PENSIONTAMA INDOSURYA\ SUKSES INHEALTH\ INDONESIA JIWASRAYA KRESNA\ LIFE MANULIFE\ INDONESIA MASKAPAI\ REASURANSI\ INDONESIA MEGA\ INDONESIA MNC\ LIFE\ ASSURANCE PANIN\ DAI-ICHI\ LIFE PASARAYA\ LIFE PRUDENTIAL\ LIFE\ ASSURANCE REASURANSI\ INTERNATIONAL\ INDONESIA REASURANSI\ NASIONAL\ INDONESIA RECAPITAL RELIANCE\ INDONESIA SEQUIS\ FINANCIAL SEQUIS\ LIFE SINARMAS\ MSIG SUN\ LIFE\ FINANCIAL\ INDONESIA SYARIAH\ ALAMIN SYARIAH\ AMANAHJIWA\ GIRI\ ARTHA TAKAFUL\ KELUARGA TOKIO\ MARINE\ LIFE\ INSURANCE\ INDONESIA TUGU\ MANDIRI TUGU\ REASURANSI\ INDONESIA ZURICH\ TOPAS\ LIFE)
+  PERMITTED_ATTRIBUTES = %i(email invitation_token bank_name insurance_company_name first_name last_name phone dob account_name account_number branch_name branch_address password password_confirmation organisation_id)
 
-  default_scope { order('id ASC') }
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable and :omniauthable
+  devise :invitable, :database_authenticatable, :registerable, :confirmable,
+         :recoverable, :rememberable, :trackable, :validatable
+
   belongs_to :organisation
-  devise :invitable
-
   validates :email, presence: true, uniqueness: true
   validates :bank_name, inclusion: BANK_NAMES, allow_blank: true
   validates :insurance_company_name, presence: true, inclusion: INSURANCE_COMPANIES

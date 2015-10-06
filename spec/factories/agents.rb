@@ -18,5 +18,7 @@ FactoryGirl.define do
     branch_name 'random bank branch'
     branch_address 'random address'
     organisation { create :organisation }
+    password 'password'
+    password_confirmation 'password'
   end
 end
