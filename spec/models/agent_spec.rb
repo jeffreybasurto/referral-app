@@ -1,4 +1,5 @@
 require 'rails_helper'
+include ActiveJob::TestHelper
 
 RSpec.describe Agent, type: :model do
   context 'rails validations' do
@@ -15,11 +16,13 @@ RSpec.describe Agent, type: :model do
   end
 
   describe '#generate_agent_id' do
-    let!(:org) { create :organisation }
+    let!(:new_id) { Devise.friendly_token(10) }
+    let(:org) { create :organisation }
     let(:existing_agent) { create :agent, organisation: org }
     let(:existing_id) { existing_agent.agent_id }
-    let!(:new_id) { Devise.friendly_token(10) }
     subject { build :agent, organisation: org }
+
+    before { subject.referral_token = 'abcdef' }
 
     context 'taken' do
       it 'retries with higher length' do
@@ -36,4 +39,41 @@ RSpec.describe Agent, type: :model do
     end
   end
 
+  describe '#generate_referral_token' do
+    let!(:new_token) { Devise.friendly_token(23) }
+    let(:org) { create :organisation }
+    let(:existing_agent) { create :agent, organisation: org }
+    let(:existing_token) { existing_agent.referral_token }
+    subject { build :agent, organisation: org }
+
+    before { subject.agent_id = 'abcdef' }
+
+    context 'taken' do
+      it 'retries with higher length' do
+        expect(Devise).to receive(:friendly_token).with(20).and_return existing_token
+        expect(Devise).to receive(:friendly_token).with(21).and_return existing_token
+        expect(Devise).to receive(:friendly_token).with(22).and_return existing_token
+        allow(Devise).to receive(:friendly_token).with(23).and_return new_token
+
+        expect {
+          expect(subject).to be_valid
+        }.to change(subject, :referral_token).from(nil).to(new_token)
+      end
+    end
+  end
+
+
+  describe '#gen_ref_token_for_link' do
+    subject { create :agent }
+
+    it 'increments ref_generated_count' do
+      expect {
+        subject.gen_ref_token_for_link
+      }.to change(subject, :ref_link_generated_count).from(0).to(1)
+    end
+
+    it 'return referral_token' do
+      expect(subject.gen_ref_token_for_link).to eq subject.referral_token
+    end
+  end
 end

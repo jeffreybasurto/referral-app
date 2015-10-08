@@ -11,7 +11,13 @@ class Agent < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :organisation
+  has_many :invitations, :class_name => self.to_s, :as => :invited_by
+
+  before_validation :generate_agent_id, :generate_referral_token
+
   validates :email, presence: true, uniqueness: true
+  validates :referral_token, presence: true, uniqueness: true
+  validates :locale, inclusion: I18n.available_locales.map(&:to_s), allow_blank: true, allow_nil: true
   validates :bank_name, inclusion: BANK_NAMES, allow_blank: true
   validates :insurance_company_name, presence: true, inclusion: INSURANCE_COMPANIES
   validates_presence_of :first_name, :phone, :dob, :organisation
@@ -20,9 +26,18 @@ class Agent < ActiveRecord::Base
 
   delegate :name, to: :organisation, prefix: true
 
-  before_validation :generate_agent_id
+  def gen_ref_token_for_link
+    self.increment!(:ref_link_generated_count)
+    self.referral_token
+  end
 
-  attr_accessor :password #to make devise_invitable happy
+  def unique_mails_sent
+    self.invitations.created_by_invite.count
+  end
+
+  def invitations_accepted
+    self.invitations.invitation_accepted.count
+  end
 
   def name
     last_name.present? ? "#{first_name} #{last_name}" : first_name
@@ -45,6 +60,20 @@ class Agent < ActiveRecord::Base
     loop do
       self.agent_id = Devise.friendly_token(length)
       if Agent.where(agent_id: self.agent_id).count.zero?
+        break
+      else
+        length += 1
+      end
+    end
+  end
+
+  def generate_referral_token
+    return if self.referral_token.present?
+    length = 20
+
+    loop do
+      self.referral_token = Devise.friendly_token(length)
+      if Agent.where(referral_token: self.referral_token).count.zero?
         break
       else
         length += 1

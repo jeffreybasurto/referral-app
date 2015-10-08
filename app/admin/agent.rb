@@ -68,7 +68,9 @@ ActiveAdmin.register Agent do
     f.inputs 'Details' do
       f.input :organisation_id, as: :search_select, url: admin_organisations_path,
               fields: [:email, :name], display_name: 'name', minimum_input_length: 2
-      f.input :email, as: :email
+      f.input :email, as: :email, required: true
+      f.input :password, required: true
+      f.input :password_confirmation, required: true
       f.input :first_name, required: true
       f.input :last_name
       f.input :phone, as: :phone, required: true
