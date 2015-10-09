@@ -1,14 +1,17 @@
-class AddOrganisationColumnsToAgent < ActiveRecord::Migration
+class AddOrganisationColumnsToAgents < ActiveRecord::Migration
   def up
-    add_column :agents, :locale, :string
-    add_column :agents, :referral_token, :string
-    add_column :agents, :ref_link_generated_count, :integer, default: 0
-    add_column :agents, :mails_sent, :integer, default: 0
+    change_table :agents do |t|
+      t.string :locale
+      t.string :referral_token
+      t.integer :ref_link_generated_count, default: 0
+      t.integer :mails_sent, default: 0
+    end
 
     org_emails = Organisation.pluck :email
     agent_emails = Agent.where(email: org_emails).pluck :email
+    diff = org_emails - agent_emails
 
-    if org_emails == agent_emails
+    if diff.empty?
       Organisation.find_each do |org|
         a = org.agents.find_by_email(org.email)
         if a.present?
@@ -19,16 +22,11 @@ class AddOrganisationColumnsToAgent < ActiveRecord::Migration
         end
       end
     else
-      raise Exception, "Missing agents with emails #{org_emails - agent_emails}"
+      raise Exception, "Missing agents with emails #{diff}"
     end
   end
 
   def down
-    add_column :organisations, :locale, :string
-    add_column :organisations, :referral_token, :string
-    add_column :organisations, :ref_link_generated_count, :integer, default: 0
-    add_column :organisations, :mails_sent, :integer, default: 0
-
     Organisation.find_each do |org|
       a = Agent.find_by_email(org.email)
       if a.present?
@@ -39,9 +37,11 @@ class AddOrganisationColumnsToAgent < ActiveRecord::Migration
       end
     end
 
-    remove_column :agents, :locale
-    remove_column :agents, :referral_token
-    remove_column :agents, :ref_link_generated_count
-    remove_column :agents, :mails_sent
+    change_table :agents do |t|
+      t.remove :locale
+      t.remove :referral_token
+      t.remove :ref_link_generated_count
+      t.remove :mails_sent
+    end
   end
 end
