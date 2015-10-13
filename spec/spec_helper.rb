@@ -4,7 +4,10 @@ end
 
 if zeus_running?
   require 'simplecov'
-  SimpleCov.start 'rails'
+  SimpleCov.start 'rails' do
+    add_filter 'vendor' #don't include vendor stuff
+    add_filter 'app/admin/' #don't include admin stuff
+  end
 end
 
 RSpec.configure do |config|
