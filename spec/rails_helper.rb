@@ -30,4 +30,6 @@ RSpec.configure do |config|
       spec.run
     end
   end
+
+  config.filter_run_excluding migration: true
 end

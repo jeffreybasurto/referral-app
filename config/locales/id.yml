@@ -14,8 +14,6 @@ id:
       more_pages:
         display_entries: "%{first}-%{last} dari %{total}"
     submit:
-      organisation:
-        create: "Daftar"
       agent:
         create: "Disetujui"
         update: "Disetujui"

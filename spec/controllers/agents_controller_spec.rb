@@ -1,7 +1,7 @@
 require 'rails_helper'
 
-RSpec.describe OrganisationsController, type: :controller do
-  subject { create(:organisation) }
+RSpec.describe AgentsController, type: :controller do
+  subject { create(:agent) }
 
   before { sign_in subject }
 
@@ -18,7 +18,7 @@ RSpec.describe OrganisationsController, type: :controller do
 
     it 'displays invitation status' do
       get :index
-      expect(assigns(:agents)).to eq subject.agents
+      expect(assigns(:agents)).to eq subject.invitations
     end
   end
 end

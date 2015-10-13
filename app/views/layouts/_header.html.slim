@@ -9,8 +9,8 @@ nav#header
         ul.dropdown-menu.dropdown-menu-left
           - ApplicationHelper::LOCALES.each do |locale, name|
             li= link_to name, url_for(params.merge(locale: locale))
-        - if organisation_signed_in?
-          li= link_to t('devise.sessions.log_out'), destroy_organisation_session_path, method: :delete
+        - if agent_signed_in?
+          li= link_to t('devise.sessions.log_out'), destroy_agent_session_path, method: :delete
         - else
-          li= link_to t('devise.sessions.log_in'), new_organisation_session_path
-          li= link_to t('devise.registrations.sign_up'), new_organisation_registration_path
+          li= link_to t('devise.sessions.log_in'), new_agent_session_path
+          li= link_to t('devise.registrations.sign_up'), new_organisation_path

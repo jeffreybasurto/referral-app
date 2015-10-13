@@ -1,11 +1,13 @@
-#organisation
+#agent
   #basic-info
     .container
-      p#welcome= t('dashboard.greeting', name: current_organisation.name, email: current_organisation.email)
+      p#welcome= t('dashboard.greeting', name: current_agent.name, email: current_agent.email)
 
       h3= t('dashboard.header')
 
-      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_organisation.invitations_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_organisation.unique_mails_sent))
+      p= t('dashboard.stats.explanation', sign_ups: t('dashboard.stats.sign_ups', count: current_agent.invitations_accepted), divider: t('dashboard.stats.divider'), sent: t('dashboard.stats.sent', count: current_agent.unique_mails_sent))
+
+      p= "#{t('dashboard.table.headers.agent_id')}: #{current_agent.agent_id}"
 
   = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
     .container

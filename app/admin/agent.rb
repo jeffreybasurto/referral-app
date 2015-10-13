@@ -1,5 +1,7 @@
 ActiveAdmin.register Agent do
   config.sort_order = 'id_asc'
+  actions :index, :show, :new, :create
+
   permit_params :bank_name, :insurance_company_name, :first_name, :last_name, :phone, :dob, :account_name,
                 :account_number, :branch_name, :branch_address, :organisation_id, :email
 

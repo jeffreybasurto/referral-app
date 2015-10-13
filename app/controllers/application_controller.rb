@@ -2,15 +2,15 @@ class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
-  before_action :authenticate_organisation!
+  before_action :authenticate_agent!
   before_filter :set_locale
 
   protected
   def default_url_options(options = {})
     url_options = { locale: I18n.locale }.merge options
 
-    if organisation_signed_in? && current_organisation.locale != url_options[:locale].to_s && I18n.available_locales.map(&:to_s).include?(url_options[:locale].to_s)
-      current_organisation.update_attribute(:locale, url_options[:locale])
+    if agent_signed_in? && current_agent.locale != url_options[:locale].to_s && I18n.available_locales.map(&:to_s).include?(url_options[:locale].to_s)
+      current_agent.update_attribute(:locale, url_options[:locale])
     end
 
     url_options
@@ -19,8 +19,6 @@ class ApplicationController < ActionController::Base
   def devise_parameter_sanitizer
     if resource_class == Agent
       Agent::ParameterSanitizer.new(Agent, :agent, params)
-    elsif resource_class == Organisation
-      Organisation::ParameterSanitizer.new(Organisation, :organisation, params)
     else
       super
     end
@@ -33,8 +31,8 @@ class ApplicationController < ActionController::Base
     else
       I18n.locale = if params[:locale]
         params[:locale]
-      elsif organisation_signed_in?
-        current_organisation.locale
+      elsif agent_signed_in?
+        current_agent.locale
       else
         I18n.default_locale
       end

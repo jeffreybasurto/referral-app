@@ -1,25 +1,17 @@
 class Organisation < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   default_scope { order('id ASC') }
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  include DeviseInvitable::Inviter
 
-  validates :email, :name, presence: true, uniqueness: true
+  validates :name, presence: true, uniqueness: true
 
-  has_many :agents, dependent: :destroy
+  has_many :agents, dependent: :destroy, inverse_of: :organisation
+  accepts_nested_attributes_for :agents
 
-  def invite_all(emails = [])
-    emails.each do |email|
-      Agent.invite!({ email: email }, self)
-      self.increment!(:mails_sent)
-    end
+  def total_ref_link_generated_count
+    self.agents.sum(:ref_link_generated_count)
   end
 
-  def gen_ref_token_for_link
-    self.increment!(:ref_link_generated_count)
-    self.referral_token
+  def total_mails_sent
+    self.agents.sum(:mails_sent)
   end
 
   def unique_mails_sent

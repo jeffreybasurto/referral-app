@@ -1,6 +1,6 @@
 = image_tag 'docdoc_logo.png'
 
-p= t('devise.mailer.invitation_instructions.someone_invited_you', name: @resource.organisation.name, email: @resource.organisation.email)
+p= t('devise.mailer.invitation_instructions.someone_invited_you', name: @resource.invited_by.name, email: @resource.invited_by.email)
 p= link_to t('devise.mailer.invitation_instructions.accept'), accept_invitation_url(@resource, :invitation_token => @token), class: 'btn btn-warning'
 p= t('devise.mailer.invitation_instructions.copy_to_browser_html', url: accept_invitation_url(@resource, :invitation_token => @token).html_safe)
 p= t('devise.mailer.invitation_instructions.your_email_html', email: mail_to(@resource.email)).html_safe

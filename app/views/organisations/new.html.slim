@@ -1,0 +1,16 @@
+#sign-up
+  .panel.panel-default
+    .panel-body
+      = simple_form_for @organisation do |f|
+        .form-header= t('devise.registrations.sign_up')
+        .form-inputs
+          = f.error_notification
+          = field_set_tag 'Organisation details' do
+            = f.input :name
+          = field_set_tag 'Agent details' do
+            = f.simple_fields_for :agents, @organisation.agents.new do |o|
+              = o.input :email, required: true, as: :email
+              = render partial: 'agents/fields', locals: { f: o }
+
+        .form-actions
+          = f.button :submit, I18n.t('devise.registrations.sign_up'), class: 'btn-warning'

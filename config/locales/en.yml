@@ -14,8 +14,6 @@ en:
       more_pages:
         display_entries: "%{first}-%{last} of %{total}"
     submit:
-      organisation:
-        create: "Sign up"
       agent:
         create: "Confirm"
         update: "Confirm"

@@ -143,6 +143,8 @@ GEM
     highline (1.7.3)
     hitimes (1.2.2)
     i18n (0.7.0)
+    i18n-debug (1.1.0)
+      i18n (< 1)
     i18n-tasks (0.8.7)
       activesupport (>= 2.3.18)
       easy_translate (>= 0.5.0)
@@ -346,6 +348,7 @@ DEPENDENCIES
   devise_invitable
   exception_notification
   factory_girl_rails
+  i18n-debug
   i18n-tasks
   jquery-rails
   kaminari

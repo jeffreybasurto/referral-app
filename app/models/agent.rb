@@ -7,11 +7,11 @@ class Agent < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+  devise :invitable, :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :trackable, :validatable#, :confirmable
 
   belongs_to :organisation
-  has_many :invitations, :class_name => self.to_s, :as => :invited_by
+  has_many :invitations, class_name: self.to_s, as: :invited_by
 
   before_validation :generate_agent_id, :generate_referral_token
 
@@ -26,6 +26,13 @@ class Agent < ActiveRecord::Base
 
   delegate :name, to: :organisation, prefix: true
 
+  def invite_all(emails = [])
+    emails.each do |email|
+      self.class.invite!({ email: email, organisation: organisation }, self)
+      self.increment!(:mails_sent)
+    end
+  end
+
   def gen_ref_token_for_link
     self.increment!(:ref_link_generated_count)
     self.referral_token
@@ -37,6 +44,10 @@ class Agent < ActiveRecord::Base
 
   def invitations_accepted
     self.invitations.invitation_accepted.count
+  end
+
+  def agents_via_ref_link
+    self.invitations.where(invitation_sent_at: nil, invitation_token: nil).count
   end
 
   def name

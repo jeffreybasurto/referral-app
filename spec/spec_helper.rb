@@ -16,6 +16,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
-  # config.order = :random
-  # Kernel.srand config.seed
+  config.order = :random
+  Kernel.srand config.seed
 end

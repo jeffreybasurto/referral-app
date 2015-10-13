@@ -62,6 +62,35 @@ RSpec.describe Agent, type: :model do
     end
   end
 
+  describe '#invite_all' do
+    subject { create(:agent) }
+
+    it 'sends nothing' do
+      assert_performed_jobs 0 do
+        subject.invite_all([])
+      end
+    end
+
+    context 'multiple emails' do
+      let(:emails) { %w(test1@test.com test2@test.com test3@test.com) }
+
+      it 'sends multiple invitation emails' do
+        expect {
+          assert_performed_jobs emails.count do
+            subject.invite_all(emails)
+          end
+        }.to change(ActionMailer::Base.deliveries, :count).by(emails.count)
+      end
+
+      it 'creates multiple pending invitations' do
+        expect {
+          subject.invite_all(emails)
+          subject.reload
+        }.to change(subject.invitations, :count).by(emails.count)
+        expect(subject.invitations.pluck(:email)).to match_array emails
+      end
+    end
+  end
 
   describe '#gen_ref_token_for_link' do
     subject { create :agent }

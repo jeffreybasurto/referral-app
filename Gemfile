@@ -42,7 +42,7 @@ gem 'exception_notification'
 gem 'phony_rails'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
-# gem 'i18n-debug', group: :development
+gem 'i18n-debug', group: :development
 gem 'kaminari'
 gem 'activeadmin', github: 'activeadmin'
 gem 'rails_12factor', group: [:staging, :production]
