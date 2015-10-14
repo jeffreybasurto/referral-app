@@ -1,0 +1,15 @@
+#sign-up
+  .panel.panel-default
+    .panel-heading
+      h1.panel-title= resource.organisation_name
+
+    .panel-body
+      = simple_form_for resource, as: resource_name, url: registration_path(resource_name) do |f|
+        .form-header= resource.name
+        .form-inputs
+          = f.error_notification
+          = f.input :current_password
+          = render partial: 'agents/fields', locals: { f: f }
+
+        .form-actions
+          = f.button :submit, class: 'btn-warning'

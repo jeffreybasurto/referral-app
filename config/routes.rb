@@ -11,7 +11,6 @@ Rails.application.routes.draw do
 
   resources :organisations, only: [:new, :create]
 
-
   devise_scope :agent do
     root 'agents#index', as: :agent_root
   end
