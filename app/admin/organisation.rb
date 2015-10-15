@@ -2,8 +2,6 @@ ActiveAdmin.register Organisation do
   config.sort_order = 'id_asc'
   permit_params :name, :email, :password, :password_confirmation
 
-  actions :index, :show
-
   index do
     column :id
     column :name
@@ -29,6 +27,15 @@ ActiveAdmin.register Organisation do
     end
 
     actions
+  end
+
+  form do |f|
+    f.inputs 'Details' do
+      f.input :name
+      f.input :email
+      f.input :password
+      f.input :password_confirmation
+    end
   end
 
   csv do
