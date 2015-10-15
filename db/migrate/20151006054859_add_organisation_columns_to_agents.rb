@@ -7,9 +7,11 @@ class AddOrganisationColumnsToAgents < ActiveRecord::Migration
       t.integer :mails_sent, default: 0
     end
 
+    test_orgs = ["jefry.yanto@docdoc.com", "charles.w.hewitt.ii@gmail.com", "emma@docdoc.com", "christian.dermawan@docdoc.com", "christoph.hannak@docdoc.com", "testerchris@test.tt", "cole.sirucek@docdoc.com", "test@example.com"]
+
     org_emails   = Organisation.pluck :email
     agent_emails = Agent.where(email: org_emails).pluck :email
-    diff         = org_emails - agent_emails
+    diff         = org_emails - agent_emails - test_orgs
     wrong_org    = []
 
     if diff.empty?
