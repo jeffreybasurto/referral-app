@@ -22,6 +22,10 @@ class Organisation < ActiveRecord::Base
     self.agents.invitation_accepted.count
   end
 
+  def invitations_pending
+    self.agents.invitation_not_accepted.count
+  end
+
   def agents_via_ref_link
     self.agents.where(invitation_sent_at: nil, invitation_token: nil).count
   end

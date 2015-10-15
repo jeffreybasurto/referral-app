@@ -5,8 +5,6 @@ ActiveAdmin.register Organisation do
   index do
     column :id
     column :name
-    column :email
-    column :referral_token
     column 'Emails sent' do |org|
       org.mails_sent
     end
@@ -14,7 +12,7 @@ ActiveAdmin.register Organisation do
       org.unique_mails_sent
     end
     column 'Number of pending agents' do |org|
-      org.agents.invitation_not_accepted.count
+      org.invitations_pending
     end
     column 'Number of agents joined (email)' do |org|
       org.invitations_accepted
@@ -39,7 +37,7 @@ ActiveAdmin.register Organisation do
   end
 
   csv do
-    (Organisation.column_names - %w(encrypted_password reset_password_token reset_password_sent_at remember_created_at ref_link_generated_count mails_sent)).each do |c|
+    (Organisation.column_names - %w(ref_link_generated_count mails_sent)).each do |c|
       column c.to_sym
     end
     column 'Emails sent' do |org|
