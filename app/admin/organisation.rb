@@ -1,6 +1,6 @@
 ActiveAdmin.register Organisation do
   config.sort_order = 'id_asc'
-  permit_params :name, :email, :password, :password_confirmation
+  permit_params :name
 
   index do
     column :id
@@ -30,9 +30,6 @@ ActiveAdmin.register Organisation do
   form do |f|
     f.inputs 'Details' do
       f.input :name
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
     end
   end
 
@@ -60,15 +57,11 @@ ActiveAdmin.register Organisation do
     end
   end
 
-  filter :email
   filter :name
 
   show do
     attributes_table do
       row :name
-      row :email
-      row :referral_token
-      row :locale
     end
   end
 

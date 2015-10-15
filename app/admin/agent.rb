@@ -1,9 +1,8 @@
 ActiveAdmin.register Agent do
   config.sort_order = 'id_asc'
-  actions :index, :show, :new, :create
 
   permit_params :bank_name, :insurance_company_name, :first_name, :last_name, :phone, :dob, :account_name,
-                :account_number, :branch_name, :branch_address, :organisation_id, :email
+                :account_number, :branch_name, :branch_address, :organisation_id, :email, :password, :password_confirmation
 
   index do
     column :id
@@ -57,6 +56,8 @@ ActiveAdmin.register Agent do
         row 'Organisation ID' do |a|
           a.organisation_id
         end
+        row :referral_token
+        row :locale
       end
 
       row 'Status' do |a|
