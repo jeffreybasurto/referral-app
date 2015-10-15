@@ -16,6 +16,7 @@ class AddOrganisationColumnsToAgents < ActiveRecord::Migration
 
     if diff.empty?
       Organisation.find_each do |org|
+        next if test_orgs.include? org.email
         a = org.agents.find_by_email(org.email)
         unless a.present?
           wrong_org << org.email
