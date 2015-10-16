@@ -8,7 +8,7 @@
           = field_set_tag 'Organisation details' do
             = f.input :name
           = field_set_tag 'Agent details' do
-            = f.simple_fields_for :agents, @organisation.agents.new do |o|
+            = f.simple_fields_for :agents do |o|
               = o.input :email, required: true, as: :email
               = render partial: 'agents/fields', locals: { f: o }
 
