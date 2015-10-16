@@ -1,17 +1,30 @@
 class RemoveDeviseFromOrganisations < ActiveRecord::Migration
   def up
     change_table :organisations do |t|
-      org_emails = Organisation.pluck :email
+      test_orgs = ["jefry.yanto@docdoc.com", "charles.w.hewitt.ii@gmail.com", "emma@docdoc.com", "christian.dermawan@docdoc.com", "christoph.hannak@docdoc.com", "testerchris@test.tt", "cole.sirucek@docdoc.com", "test@example.com"]
+
+      org_emails   = Organisation.pluck :email
       agent_emails = Agent.where(email: org_emails).pluck :email
-      diff = org_emails - agent_emails
+      diff         = org_emails - agent_emails - test_orgs
+      wrong_org    = []
 
       if diff.empty?
         Organisation.find_each do |org|
+          next if test_orgs.include? org.email
           a = org.agents.find_by_email(org.email)
-          if a.present?
-            org.agents.where.not(email: a.email).update_all(invited_by_id: a.id, invited_by_type: 'Agent')
-          else
-            raise Exception, "Agent with email #{org.email} might be in wrong Organisation. Please check."
+          unless a.present?
+            wrong_org << org.email
+          end
+        end
+
+        if wrong_org.present?
+          raise Exception, "Agents with email #{wrong_org.join(', ')} might be in wrong Organisation. Please check."
+        else
+          Organisation.where.not(email: test_orgs).find_each do |org|
+            a = org.agents.find_by_email(org.email)
+            if a.present?
+              org.agents.where.not(email: a.email).update_all(invited_by_id: a.id, invited_by_type: 'Agent')
+            end
           end
         end
       else

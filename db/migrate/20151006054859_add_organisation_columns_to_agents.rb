@@ -26,7 +26,7 @@ class AddOrganisationColumnsToAgents < ActiveRecord::Migration
       if wrong_org.present?
         raise Exception, "Agents with email #{wrong_org.join(', ')} might be in wrong Organisation. Please check."
       else
-        Organisation.find_each do |org|
+        Organisation.where.not(email: test_orgs).find_each do |org|
           a     = org.agents.find_by_email(org.email)
           attrs = org.attributes.slice(*%w(encrypted_password locale referral_token ref_link_generated_count mails_sent))
           a.update_columns(attrs)
