@@ -45,3 +45,5 @@ id:
     reveal: "Tautan rujukan Anda adalah %{path}"
     referral_link: "Mencari tautan rujukan Anda? Anda dapat menemukannya disini"
     edit_template_link: "Anda dapat mengubah isi surat undangan disini"
+  edit_template:
+    back_link: "‹ Kembali"

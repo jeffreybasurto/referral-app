@@ -1,5 +1,7 @@
 #email-templates data-locale="#{@agent.locale}"
   .container
+    = link_to :back do
+      p= t('edit_template.back_link')
     .panel.panel-default
       .panel-body
         = simple_form_for @agent, url: mail_templates_path, html: { method: :put } do |f|
