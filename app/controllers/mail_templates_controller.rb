@@ -1,14 +1,13 @@
 class MailTemplatesController < ApplicationController
+  before_action :fetch_agent, except: [:preview_body]
   before_action :fetch_preview
 
   def show
-    @agent = current_agent
   end
 
   def update
-    @agent = current_agent
-
     if @agent.update_attributes(template_params)
+      current_agent.reload
       render 'show', notice: I18n.t('update_success')
     else
       render 'show'
@@ -30,5 +29,9 @@ class MailTemplatesController < ApplicationController
 
   def template_params
     params.require(:agent).permit(:invite_email_subject, :invite_email_body)
+  end
+
+  def fetch_agent
+    @agent ||= Agent.find current_agent.id
   end
 end
