@@ -3,6 +3,8 @@
 en:
   devise:
     mailer:
+      confirmation_instructions:
+        confirm_cta: "Confirm my account"
       reset_password_instructions:
         subject: "Reset password instructions"
     passwords:

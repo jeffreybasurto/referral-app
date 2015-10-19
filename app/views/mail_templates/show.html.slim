@@ -1,0 +1,40 @@
+#email-templates
+  .container
+    .panel.panel-default
+      .panel-body
+        = simple_form_for @agent, url: mail_templates_path, html: { method: :put } do |f|
+          .form-header Invitation Email
+          .form-inputs
+            = f.error_notification
+            = f.input :invite_email_subject, label: 'Email Subject'
+            = f.input :invite_email_body, label: 'Body Text', as: :text
+
+          .form-actions
+            = f.button :submit, t('devise.passwords.save_button'), class: 'btn-warning'
+
+#email-preview
+  .container
+    .panel.panel-default
+      .panel-heading
+        h3.panel-title Preview
+      .panel-body
+        table
+          tbody
+            tr
+              th From:
+              td= @email.header['from']
+
+            - if @email.reply_to
+              tr
+                th Reply-To:
+                td= @email.header['reply-to']
+
+            tr
+              th To:
+              td= @email.header['to']
+            tr
+              th Subject:
+              td
+                strong= @email.subject
+        br
+        iframe#message-body seamless='' name='messageBody' src=preview_body_mail_templates_path

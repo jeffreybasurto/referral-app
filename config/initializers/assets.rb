@@ -15,4 +15,5 @@ Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  agents/registrations.css
                                                  organisations.css
                                                  agents.css
+                                                 mail_templates.css
 )

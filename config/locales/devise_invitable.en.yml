@@ -3,7 +3,6 @@ en:
     mailer:
       invitation_instructions:
         subject: "Invitation instructions"
-        someone_invited_you: "%{name} (%{email}) has invited you to join his professional network on DocDoc."
         copy_to_browser_html: "You may copy/paste this link into the browser:  %{url}"
         your_email_html: "Your sign in email is: %{email}"
         accept: "Accept invitation"

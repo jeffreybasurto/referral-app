@@ -1,6 +1,8 @@
 id:
   devise:
     mailer:
+      confirmation_instructions:
+        confirm_cta: "Konfirmasi Akun Saya"
       reset_password_instructions:
         subject: "Petunjuk memperbaharui kata sandi"
     passwords:

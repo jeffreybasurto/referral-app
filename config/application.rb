@@ -24,6 +24,7 @@ module Referral
     config.active_record.raise_in_transactional_callbacks = true
 
     config.i18n.available_locales = [:id, :en]
+    config.action_mailer.preview_path = "#{Rails.root}/app/mailers/previews"
   end
 end
 

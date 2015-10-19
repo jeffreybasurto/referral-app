@@ -1,5 +1,6 @@
 en:
   app_name: 'DocDoc Referral'
+  update_success: 'Updated successfully'
   errors:
     messages:
       improbable_phone: "is an invalid number"
@@ -43,3 +44,4 @@ en:
           joined_via_link: "Joined (Link)"
     reveal: "Your referral link is %{path}"
     referral_link: "Looking for your referral link? You can find it here"
+    edit_template_link: "You can edit your invitation mail template here"

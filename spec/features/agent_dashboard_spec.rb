@@ -50,4 +50,24 @@ RSpec.feature 'Agent dashboard', type: :feature do
     click_link I18n.t('dashboard.referral_link')
     expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_registration_url(invitation_token: subject.referral_token, locale: I18n.locale)))
   end
+
+  scenario 'Edit invitation template', js: true do
+    pending 'Fix this test'
+    expect(page).to have_link(I18n.t('dashboard.edit_template_link'), href: mail_templates_path)
+    click_link I18n.t('dashboard.edit_template_link')
+
+    fill_in 'Email Subject', with: 'New Subject'
+    fill_in 'Body Text', with: 'New Body Text'
+    click_button I18n.t('devise.passwords.save_button')
+    subject.reload
+
+    expect(subject.invite_email_subject).to eq 'New Subject'
+    expect(subject.invite_email_body).to eq 'New Body Text'
+    within '#email-preview' do
+      expect(page).to have_content 'New Subject'
+      within_frame 'message-body' do
+        expect(page).to have_content 'New Body Text'
+      end
+    end
+  end
 end

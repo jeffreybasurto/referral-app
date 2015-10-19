@@ -4,7 +4,6 @@ id:
       invitation_instructions:
         subject: "Petunjuk undangan"
         accept: "Undangan diterima"
-        someone_invited_you: "%{name} (%{email}) telah mengundang Anda untuk bergabung bersama di jaringan profesional DocDoc"
-        copy_to_browser_html: "Silahkan Anda salin/tempel tautan ini ke browser Anda : %{url}"
+        copy_to_browser_html: "Silahkan Anda salin/tempel tautan ini ke browser Anda: %{url}"
         your_email_html: "Email yang Anda daftarkan adalah %{email}"
         doc_doc_team_html: "The DocDoc Team<br />%{url}"

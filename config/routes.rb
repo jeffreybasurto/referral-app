@@ -18,4 +18,8 @@ Rails.application.routes.draw do
   resources :invitations, only: [:create]
 
   root 'devise/sessions#new'
+
+  resource :mail_templates, only: [:show, :update] do
+    get :preview_body
+  end
 end

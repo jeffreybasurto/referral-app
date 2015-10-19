@@ -1,0 +1,14 @@
+<% if @resource.invited_by.invite_email_body.present? %>
+  <%= @resource.invited_by.invite_email_body %>
+<% end %>
+
+--------------------------------------------------
+
+<% I18n.with_locale @resource.invited_by.locale do %>
+  <%= t('devise.mailer.invitation_instructions.accept') %>
+  <%= t('devise.mailer.invitation_instructions.copy_to_browser_html', url: accept_invitation_url(@resource, :invitation_token => @token).html_safe) %>
+  <%= t('devise.mailer.invitation_instructions.your_email_html', email: @resource.email) %>
+  <%= t('devise.mailer.invitation_instructions.doc_doc_team_html', url: 'http://www.docdoc.sg') %>
+<% end %>
+
+--------------------------------------------------

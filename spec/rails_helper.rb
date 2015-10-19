@@ -31,5 +31,9 @@ RSpec.configure do |config|
     end
   end
 
+  config.after(:each) do
+    Warden.test_reset!
+  end
+
   config.filter_run_excluding migration: true
 end

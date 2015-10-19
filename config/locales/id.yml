@@ -1,5 +1,6 @@
 id:
   app_name: 'DocDoc Referral'
+  update_success: 'Pembaharuan berhasil'
   errors:
     messages:
       improbable_phone: "nomor ini yang tidak valid"
@@ -43,3 +44,4 @@ id:
           joined_via_link: "Telah bergabung melalui (Link)"
     reveal: "Tautan rujukan Anda adalah %{path}"
     referral_link: "Mencari tautan rujukan Anda? Anda dapat menemukannya disini"
+    edit_template_link: "Anda dapat mengubah isi surat undangan disini"
