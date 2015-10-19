@@ -14,6 +14,8 @@
       = f.button :submit, class: 'btn-warning pull-right'
       span= f.input_field :emails, label: false, class: 'form-control'
 
+      p= link_to t('dashboard.edit_template_link'), mail_templates_path
+
   #email-stats.container
     .pull-right
       span#entries-info= page_entries_info @agents
@@ -46,5 +48,3 @@
                 td.joined= t('dashboard.table.headers.invitation_statuses.joined_via_mail')
 
     p= link_to t('dashboard.referral_link'), reveal_referral_token_path
-
-    p= link_to t('dashboard.edit_template_link'), mail_templates_path
