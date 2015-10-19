@@ -34,9 +34,6 @@ RSpec.feature 'Agents registration', type: :feature do
     expect(Organisation.last.name).to eq org_name
     expect(Organisation.last.agents.count).to eq 1
 
-    fill_in 'agent[email]', with: sample.email
-    fill_in 'agent[password]', with: 'password'
-    click_button I18n.t('devise.sessions.log_in')
     expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end
 
