@@ -16,7 +16,7 @@ class MailTemplatesController < ApplicationController
 
   def preview_body
     part                  = AgentMailerPreview.new.invitation_instructions(current_agent)
-    response.content_type = Mime::TEXT
+    response.content_type = Mime::HTML
     render text: part.respond_to?(:decoded) ? part.decoded : part
   end
 

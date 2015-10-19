@@ -1,4 +1,4 @@
-#email-templates
+#email-templates data-locale="#{@agent.locale}"
   .container
     .panel.panel-default
       .panel-body
@@ -38,3 +38,9 @@
                 strong= @email.subject
         br
         iframe#message-body seamless='' name='messageBody' src=preview_body_mail_templates_path
+
+coffee:
+  locale = $('#email-templates').data('locale')
+  $('#agent_invite_email_body').froalaEditor(
+    language: locale
+  )
