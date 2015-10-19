@@ -1,4 +1,4 @@
-= image_tag image_url('docdoc_logo.png')
+= image_tag 'docdoc_logo.png'
 
 - if @resource.invited_by.invite_email_body.present?
   = @resource.invited_by.invite_email_body.html_safe
