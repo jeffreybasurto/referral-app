@@ -6,7 +6,7 @@ ActiveAdmin.register Organisation do
     column :id
     column :name
     column 'Emails sent' do |org|
-      org.mails_sent
+      org.total_mails_sent
     end
     column 'Unique emails sent' do |org|
       org.unique_mails_sent
@@ -21,7 +21,7 @@ ActiveAdmin.register Organisation do
       org.agents_via_ref_link
     end
     column 'Referral links generated' do |org|
-      org.ref_link_generated_count
+      org.total_ref_link_generated_count
     end
 
     actions
@@ -38,7 +38,7 @@ ActiveAdmin.register Organisation do
       column c.to_sym
     end
     column 'Emails sent' do |org|
-      org.mails_sent
+      org.total_mails_sent
     end
     column 'Unique emails sent' do |org|
       org.unique_mails_sent
@@ -53,7 +53,7 @@ ActiveAdmin.register Organisation do
       org.agents_via_ref_link
     end
     column 'Referral links generated' do |org|
-      org.ref_link_generated_count
+      org.total_ref_link_generated_count
     end
   end
 

@@ -70,7 +70,7 @@ ActiveAdmin.register Agent do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Details' do
       f.input :organisation_id, as: :search_select, url: admin_organisations_path,
-              fields: [:email, :name], display_name: 'name', minimum_input_length: 2
+              fields: [:name], display_name: 'name', minimum_input_length: 2
       f.input :email, as: :email, required: true
       f.input :password, required: true
       f.input :password_confirmation, required: true
