@@ -17,6 +17,3 @@ Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  agents.css
                                                  mail_templates.css
 )
-
-Rails.application.config.assets.precompile += %w(*.svg *.eot *.woff *.ttf *.gif *.png *.ico)
-Rails.application.config.assets.precompile << /\A(?!active_admin).*\.(js|css\.erb)\z/
