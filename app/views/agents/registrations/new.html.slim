@@ -10,7 +10,7 @@
           = f.error_notification
           = f.hidden_field :organisation_id
           = f.input :email, required: true, as: :email
-          = render partial: 'agents/fields', locals: { f: f }
+          = render partial: 'agents/fields', locals: { f: f, insurance_inherited: true }
 
         .form-actions
           = f.button :submit, class: 'btn-warning'

@@ -39,7 +39,7 @@ RSpec.feature 'Agents registration', type: :feature do
 
 
   scenario 'Agent sign up from invite' do
-    invite = Agent.invite!({ email: sample.email, organisation: org, skip_invitation: true }, agent)
+    invite = Agent.invite!({ email: sample.email, organisation: org, skip_invitation: true, insurance_company_name: agent.insurance_company_name }, agent)
     visit accept_agent_invitation_url(invitation_token: invite.raw_invitation_token)
 
     fill_in_common_fields
@@ -69,7 +69,6 @@ def fill_in_common_fields
   fill_in 'agent[last_name]', with: sample.last_name
   fill_in 'agent[phone]', with: sample.phone
   fill_in 'agent[dob]', with: sample.dob
-  select sample.insurance_company_name, from: 'agent[insurance_company_name]'
   choose sample.bank_name
   fill_in 'agent[account_name]', with: sample.account_name
   fill_in 'agent[account_number]', with: sample.account_number

@@ -4,7 +4,10 @@
 = f.input :last_name
 = f.input :phone, as: :tel, required: true
 = f.input :dob, as: :date_time_picker, required: true
-= f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, required: true
+- if insurance_inherited
+  = f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, readonly: true
+- else
+  = f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, required: true
 .form-group
   = f.label :bank_name
   .input-group

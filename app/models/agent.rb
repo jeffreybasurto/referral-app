@@ -28,7 +28,7 @@ class Agent < ActiveRecord::Base
 
   def invite_all(emails = [])
     emails.each do |email|
-      self.class.invite!({ email: email, organisation: organisation }, self)
+      self.class.invite!({ email: email, organisation: organisation, insurance_company_name: insurance_company_name }, self)
       self.increment!(:mails_sent)
     end
   end

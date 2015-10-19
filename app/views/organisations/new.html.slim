@@ -10,7 +10,7 @@
           = field_set_tag 'Agent details' do
             = f.simple_fields_for :agents do |o|
               = o.input :email, required: true, as: :email
-              = render partial: 'agents/fields', locals: { f: o }
+              = render partial: 'agents/fields', locals: { f: o, insurance_inherited: false }
 
         .form-actions
           = f.button :submit, I18n.t('devise.registrations.sign_up'), class: 'btn-warning'

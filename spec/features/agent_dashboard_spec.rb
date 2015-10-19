@@ -51,7 +51,7 @@ RSpec.feature 'Agent dashboard', type: :feature do
     expect(page).to have_content(I18n.t('dashboard.reveal', path: new_agent_registration_url(invitation_token: subject.referral_token, locale: I18n.locale)))
   end
 
-  scenario 'Edit invitation template', js: true do
+  scenario 'Edit invitation template' do
     expect(page).to have_link(I18n.t('dashboard.edit_template_link'), href: mail_templates_path)
     click_link I18n.t('dashboard.edit_template_link')
 
