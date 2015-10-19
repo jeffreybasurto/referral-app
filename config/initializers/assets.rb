@@ -8,7 +8,7 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.sass, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  devise/sessions.css
                                                  devise/invitations.css
@@ -17,3 +17,6 @@ Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  agents.css
                                                  mail_templates.css
 )
+
+Rails.application.config.assets.precompile += %w(*.svg *.eot *.woff *.ttf *.gif *.png *.ico)
+Rails.application.config.assets.precompile << /\A(?!active_admin).*\.(js|css\.erb)\z/

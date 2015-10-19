@@ -7,7 +7,7 @@ class AgentMailer < Devise::Mailer
     @token = token
     opts[:subject] = record.invited_by.invite_email_subject if record.invited_by.invite_email_subject.present?
     opts[:reply_to] = record.invited_by.email
-    opts[:content_type] = 'text/plain'
+    opts[:content_type] = 'text/html'
     devise_mail(record, :invitation_instructions, opts)
   end
 
