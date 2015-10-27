@@ -14,3 +14,5 @@ html
     - elsif flash[:error].present?
       .alert.alert-danger= flash[:error]
     = yield
+
+    = render 'layouts/livechat'
