@@ -8,7 +8,7 @@ nav#header
           span.caret
         ul.dropdown-menu.dropdown-menu-left
           - ApplicationHelper::LOCALES.each do |locale, name|
-            li= link_to name, url_for(params.merge(locale: locale))
+            li= link_to name, url_for(params.merge(locale: locale)), data: { no_turbolink: true }
         - if agent_signed_in?
           li= link_to current_agent.name, edit_agent_registration_path
           li= link_to t('devise.sessions.log_out'), destroy_agent_session_path, method: :delete
