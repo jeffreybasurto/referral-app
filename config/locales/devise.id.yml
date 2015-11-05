@@ -17,10 +17,9 @@ id:
       updated: "Kata sandi Anda telah berhasil diubah. Anda saat ini masuk"
       updated_not_active: "Kata sandi Anda telah berhasil diubah"
     registrations:
-      sign_up_question: "Belum memiliki akun?"
       sign_up: "Daftar"
-      signed_up: "Selamat datang! Anda berhasil terdaftar"
-      agent_success: "Terima kasih telah bergabung dengan kami. ID Agent Anda adalah <b>%{id}</b>."
+      signed_up: "Selamat! Saat ini, Anda telah menjadi bagian dari jaringan DocDoc. Kami akan menindaklanjutinya dengan mengirimkan email untuk memperkenalkan DocDoc kepada Anda dan memastikan hubungan baru kita memberikan manfaat terbaik. Sambil menunggu, Anda dapat memperkenalkan DocDoc ke teman, keluarga, dan kenalan Anda dengan memasukkan email mereka di bawah ini. Semakin besar  Keluarga DocDoc, semakin banyak juga manfaat yang diberikan bagi semua orang."
+      sign_up_question: "Belum memiliki akun?"
     recovers:
       link: "Lupa kata sandi?"
     sessions:

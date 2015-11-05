@@ -34,6 +34,7 @@ RSpec.feature 'Agents registration', type: :feature do
     expect(Organisation.last.name).to eq org_name
     expect(Organisation.last.agents.count).to eq 1
 
+    expect(page).to have_content I18n.t('devise.registrations.signed_up')
     expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end
 
@@ -47,6 +48,7 @@ RSpec.feature 'Agents registration', type: :feature do
     expect {
       click_button I18n.t('helpers.submit.agent.update')
     }.to change(org, :invitations_accepted).by(1)
+    expect(page).to have_content I18n.t('devise.invitations.updated')
   end
 
   scenario 'Agent sign up from link' do
@@ -58,6 +60,7 @@ RSpec.feature 'Agents registration', type: :feature do
     expect {
       click_button I18n.t('helpers.submit.agent.create')
     }.to change(org, :agents_via_ref_link).by(1)
+    expect(page).to have_content I18n.t('devise.invitations.updated')
   end
 end
 

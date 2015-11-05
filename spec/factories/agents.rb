@@ -20,5 +20,6 @@ FactoryGirl.define do
     organisation { create :organisation }
     password 'password'
     password_confirmation 'password'
+    locale 'id'
   end
 end

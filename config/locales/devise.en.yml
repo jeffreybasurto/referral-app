@@ -20,8 +20,7 @@ en:
       updated_not_active: "Your password has been changed successfully."
     registrations:
       sign_up: "Sign up"
-      signed_up: "Welcome! You have signed up successfully."
-      agent_success: "Thank you for registering with us. Your Agent ID is <b>%{id}</b>."
+      signed_up: "Congratulations! You are now a member of the DocDoc network.  We will be following up with a email to introduce you to DocDoc and to ensure we make the most of our new relationship. In the meantime, please introduce your friends, family and associates to DocDoc by adding their emails below. The bigger the DocDoc family the more everyone benefits."
       sign_up_question: "Don’t have an account?"
     recovers:
       link: "Forgot your password?"
