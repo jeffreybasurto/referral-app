@@ -1,23 +1,11 @@
 - if @resource.invited_by.invite_email_body.present?
   = @resource.invited_by.invite_email_body.html_safe
   br
-- elsif @resource.invited_by.locale.to_sym == :en
-  p Welcome to the DocDoc Family!
-
-  p You have been invited to join the tens of thousands of people throughout Indonesia and Southeast Asia who find DocDoc to be an important tool for securing quality healthcare for themselves, their loved ones and their clients.
-
-  p At DocDoc, it is our mission to ensure our patients find the right medical professionals for their unique situation and that they never overpay for these services.  In fact, we guarantee our clients get the lowest possible price for the care they receive through a DocDoc referral.  Moreover, our team of medically-trained professionals work closely with each patient to ensure our patients see the right doctor for their needs.
-
-  p The next step in your journey with us is to please click below.  We will then send you more information about the DocDoc company and how we can work together to help you care for your loved ones and clients.
-- else
-  //TODO - add Bahasa
-  p Welcome to the DocDoc Family!
-
-  p You have been invited to join the tens of thousands of people throughout Indonesia and Southeast Asia who find DocDoc to be an important tool for securing quality healthcare for themselves, their loved ones and their clients.
-
-  p At DocDoc, it is our mission to ensure our patients find the right medical professionals for their unique situation and that they never overpay for these services.  In fact, we guarantee our clients get the lowest possible price for the care they receive through a DocDoc referral.  Moreover, our team of medically-trained professionals work closely with each patient to ensure our patients see the right doctor for their needs.
-
-  p The next step in your journey with us is to please click below.  We will then send you more information about the DocDoc company and how we can work together to help you care for your loved ones and clients.
+- I18n.with_locale(@resource.invited_by.locale.to_sym) do
+  p= t('devise.mailer.invitation_instructions.welcome')
+  p= t('devise.mailer.invitation_instructions.p1')
+  p= t('devise.mailer.invitation_instructions.p2')
+  p= t('devise.mailer.invitation_instructions.p3')
 | --------------------------------------------------
 - I18n.with_locale @resource.invited_by.locale do
   p= link_to t('devise.mailer.invitation_instructions.accept'), accept_invitation_url(@resource, :invitation_token => @token), class: 'btn btn-warning'
