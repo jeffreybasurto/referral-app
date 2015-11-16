@@ -11,8 +11,10 @@
 
   = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
     .container
+      .alert.alert-info
+        p= t('dashboard.invitation_instructions')
       = f.button :submit, class: 'btn-warning pull-right'
-      span= f.input_field :emails, label: false, class: 'form-control'
+      span= f.input_field :emails, as: :text, label: false, class: 'form-control'
 
       p= link_to t('dashboard.edit_template_link'), mail_templates_path
 

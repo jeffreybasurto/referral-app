@@ -45,5 +45,14 @@ en:
     reveal: "Your referral link is %{path}"
     referral_link: "Looking for your referral link? You can find it here"
     edit_template_link: "You can edit your invitation mail template here"
+    invitation_instructions: |
+      Enter email addresses of your agents, one per line or separated by comma. E.g.:
+
+      email1@docdoc.com
+      email2@docdoc.com
+
+      or
+
+      email1@docdoc.com, email2@docdoc.com
   edit_template:
     back_link: "‹ Go back to sending invitations"
