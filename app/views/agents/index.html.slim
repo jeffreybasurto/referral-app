@@ -12,7 +12,7 @@
   = simple_form_for :invitations, url: invitations_path, html: { method: :post, id: 'invitation-form' } do |f|
     .container
       .alert.alert-info
-        p= t('dashboard.invitation_instructions')
+        p= t('dashboard.invitation_instructions').html_safe
       = f.button :submit, class: 'btn-warning pull-right'
       span= f.input_field :emails, as: :text, label: false, class: 'form-control'
 

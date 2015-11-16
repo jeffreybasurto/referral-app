@@ -46,10 +46,13 @@ id:
     referral_link: "Mencari tautan rujukan Anda? Anda dapat menemukannya disini"
     edit_template_link: "Anda dapat mengubah isi surat undangan disini"
     invitation_instructions: |
-      Masukkan alamat email agen Anda, satu per baris atau dipisahkan dengan koma. Mis.:
+      Masukkan alamat email agen Anda, satu per baris atau dipisahkan dengan koma. Mis.:<br />
       email1@docdoc.com
+      <br />
       email2@docdoc.com
+      <br />
       atau
+      <br />
       email1@docdoc.com, email2@docdoc.com
   edit_template:
     back_link: "‹ Kembali"
