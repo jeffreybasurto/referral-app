@@ -38,7 +38,6 @@ RSpec.feature 'Agents registration', type: :feature do
     expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end
 
-
   scenario 'Agent sign up from invite' do
     invite = Agent.invite!({ email: sample.email, organisation: org, skip_invitation: true, insurance_company_name: agent.insurance_company_name }, agent)
     visit accept_agent_invitation_url(invitation_token: invite.raw_invitation_token)

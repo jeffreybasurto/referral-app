@@ -1,15 +1,15 @@
 id:
   devise:
     invitations:
-      updated: "Selamat! Saat ini, Anda telah menjadi bagian dari jaringan DocDoc. Kami akan menindaklanjutinya dengan mengirimkan email untuk memperkenalkan DocDoc kepada Anda dan memastikan hubungan baru kita memberikan manfaat terbaik. Sambil menunggu, Anda dapat memperkenalkan DocDoc ke teman, keluarga, dan kenalan Anda dengan memasukkan email mereka di bawah ini. Semakin besar  Keluarga DocDoc, semakin banyak juga manfaat yang diberikan bagi semua orang."
+      updated: "Selamat! Anda telah menjadi anggota keluarga besar DocDoc. Kami akan mengirimkan email perkenalan lebih lengkap mengenai  Docdoc dan memastikan hubungan kerjasama kita kedepannya. Selanjutnya Anda dapat memperkenalkan teman, keluarga, dan kerabat serta asosiasi untuk bergabung dengan Docdoc dengan mengirimkan email undangan yang tertera dibawah ini. Semakin banyak orang bergabung dengan DocDoc semakin banyak orang merasakan manfaatnya."
     mailer:
       invitation_instructions:
         subject: "Petunjuk undangan"
-        accept: "Undangan diterima"
-        welcome: "Selamat bergabung dengan keluarga DocDoc!"
-        p1: "Anda telah diundang untuk bergabung dengan puluhan ribu orang dari seluruh pelosok Indonesia dan Asia Tenggara yang telah menganggap DocDoc sebagai instrumen penting untuk menjaga kualitas kesehatan mereka sendiri, orang-orang terkasih dan klien mereka. "
-        p2: "Di DocDoc, menjadi sebuah tujuan kami untuk memastikan bahwa pasien kami mendapatkan tenaga medis profesional untuk kondisi mereka dan mereka tidak akan perlu membayar lebih dari yang seharusnya untuk pelayanan tersebut. Bahkan, kami menjamin klien-klien kami mendapatkan harga yang paling terjangkau untuk pelayanan yang mereka terima melalui rujukan DocDoc. Terlebih lagi, tim tenaga medis kami yang telah terlatih secara profesional bekerja dekat dengan setiap pasien untuk memastikan mereka mendapatkan dokter yang sesuai dengan kebutuhannya."
-        p3: "Langkah selanjutnya dari perjalanan Anda dengan kami adalah dengan menekan tautan di bawah ini. Kami akan mengirimkan lebih banyak informasi mengenai perusahaan DocDoc dan bagaimana kami dapat bekerja sama untuk membantu kepedulian Anda terhadap orang yang Anda sayangi dan juga klien-klien Anda."
+        welcome: "Selamat datang dalam keluarga besar DocDoc!"
+        p1: "Anda telah terpilih untuk bergabung dengan puluhan ribu orang lainnya, baik di Indonesia dan  seluruh Asia Tenggara, yang mana telah mengakui Docdoc sebagai aplikasi penting untuk mendapatkan pelayanan kesehatan yang berkualitas bagi Anda, orang-orang yang Anda cintai dan  klien Anda."
+        p2: "Misi Docdoc adalah memastikan setiap pasien kami menemukan profesional medis yang tepat untuk keadaan penyakit mereka tanpa  membayar lebih mahal. Kami menjamin sebisa mungkin setiap pelayanan kesehatan yang dipilih  melalui jasa Docdoc adalah harga termurah. Lebih dari itu kami didukung  tim yang terlatih dan profesional untuk bekerja sama secara komunikatif untuk memastikan pasien menemukan dokter yang paling tepat."
+        p3: "Langkah selanjutnya untuk bergabung dengan DocDoc silahkan klik disini. Kami akan mengirimkan informasi lengkap mengenai DocDoc  dan bagaimana kita bekerjasama untuk membantu setiap orang yang Anda cintai dan klien Anda."
         copy_to_browser_html: "Silahkan Anda salin/tempel tautan ini ke browser Anda: %{url}"
         your_email_html: "Email yang Anda daftarkan adalah %{email}"
+        accept: "Undangan diterima"
         doc_doc_team_html: "The DocDoc Team<br />%{url}"

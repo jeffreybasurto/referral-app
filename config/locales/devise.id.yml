@@ -18,7 +18,7 @@ id:
       updated_not_active: "Kata sandi Anda telah berhasil diubah"
     registrations:
       sign_up: "Daftar"
-      signed_up: "Selamat! Saat ini, Anda telah menjadi bagian dari jaringan DocDoc. Kami akan menindaklanjutinya dengan mengirimkan email untuk memperkenalkan DocDoc kepada Anda dan memastikan hubungan baru kita memberikan manfaat terbaik. Sambil menunggu, Anda dapat memperkenalkan DocDoc ke teman, keluarga, dan kenalan Anda dengan memasukkan email mereka di bawah ini. Semakin besar  Keluarga DocDoc, semakin banyak juga manfaat yang diberikan bagi semua orang."
+      signed_up: "Selamat! Anda telah menjadi anggota keluarga besar DocDoc. Kami akan mengirimkan email perkenalan lebih lengkap mengenai  Docdoc dan memastikan hubungan kerjasama kita kedepannya. Selanjutnya Anda dapat memperkenalkan teman, keluarga, dan kerabat serta asosiasi untuk bergabung dengan Docdoc dengan mengirimkan email undangan yang tertera dibawah ini. Semakin banyak orang bergabung dengan DocDoc semakin banyak orang merasakan manfaatnya."
       sign_up_question: "Belum memiliki akun?"
     recovers:
       link: "Lupa kata sandi?"
