@@ -31,6 +31,8 @@ ActiveAdmin.register Organisation do
     f.inputs 'Details' do
       f.input :name
     end
+    
+    actions
   end
 
   csv do
