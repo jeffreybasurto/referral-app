@@ -31,7 +31,7 @@ ActiveAdmin.register Organisation do
     f.inputs 'Details' do
       f.input :name
     end
-    
+
     actions
   end
 
@@ -70,7 +70,7 @@ ActiveAdmin.register Organisation do
   sidebar 'Stats', only: :show do
     attributes_table do
       row 'Emails sent' do |org|
-        org.mails_sent
+        org.total_mails_sent
       end
       row 'Unique emails sent' do |org|
         org.unique_mails_sent
@@ -85,7 +85,7 @@ ActiveAdmin.register Organisation do
         org.agents_via_ref_link
       end
       row 'Referral links generated' do |org|
-        org.ref_link_generated_count
+        org.total_ref_link_generated_count
       end
     end
   end
