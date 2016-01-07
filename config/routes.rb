@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   end
   get 'reveal_referral_token', to: 'agents#reveal_referral_link'
 
-  resources :organisations, only: [:new, :create]
+  resources :organisations, only: [:new, :create] do
+    get :autocomplete_organisation_name, on: :collection
+  end
 
   devise_scope :agent do
     root 'agents#index', as: :agent_root

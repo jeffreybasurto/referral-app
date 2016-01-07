@@ -6,7 +6,7 @@
         .form-inputs
           = f.error_notification
           = field_set_tag 'Organisation details' do
-            = f.input :name
+            = f.input :name, url: autocomplete_organisation_name_organisations_path, as: :autocomplete
           = field_set_tag 'Agent details' do
             = f.simple_fields_for :agents do |o|
               = o.input :email, required: true, as: :email

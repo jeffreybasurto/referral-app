@@ -16,6 +16,7 @@ gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -52,6 +53,7 @@ gem 'routing-filter'
 gem 'select2-rails', '~> 3.5.9'
 gem 'activeadmin_addons'
 gem 'wysiwyg-rails', '2.0.0.pre.rc.3'
+gem 'rails-jquery-autocomplete'
 
 group :development, :test do
   gem 'byebug'
@@ -67,6 +69,7 @@ group :test do
   gem 'simplecov', :require => false
   gem 'database_cleaner'
   gem 'shoulda-matchers', require: false
+  gem 'poltergeist'
 end
 
 gem 'thin'

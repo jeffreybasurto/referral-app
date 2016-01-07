@@ -9,6 +9,7 @@
         .form-inputs
           = f.error_notification
           = f.hidden_field :organisation_id
+          = hidden_field_tag :invitation_token, @token
           = f.input :email, required: true, as: :email
           = render partial: 'agents/fields', locals: { f: f, insurance_inherited: true }
 

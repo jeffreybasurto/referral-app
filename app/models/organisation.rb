@@ -27,6 +27,6 @@ class Organisation < ActiveRecord::Base
   end
 
   def agents_via_ref_link
-    self.agents.where(invitation_sent_at: nil, invitation_token: nil).count
+    self.agents.where(invitation_sent_at: nil, invitation_token: nil).where.not(invited_by_id: nil).count
   end
 end
