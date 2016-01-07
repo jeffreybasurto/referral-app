@@ -1,6 +1,6 @@
 ActiveAdmin.register Organisation do
   config.sort_order = 'id_asc'
-  permit_params :name
+  permit_params :name, :test
 
   index do
     column :id
@@ -23,6 +23,7 @@ ActiveAdmin.register Organisation do
     column 'Referral links generated' do |org|
       org.total_ref_link_generated_count
     end
+    column :test
 
     actions
   end
@@ -30,6 +31,7 @@ ActiveAdmin.register Organisation do
   form do |f|
     f.inputs 'Details' do
       f.input :name
+      f.input :test, as: :boolean
     end
 
     actions
@@ -57,6 +59,7 @@ ActiveAdmin.register Organisation do
     column 'Referral links generated' do |org|
       org.total_ref_link_generated_count
     end
+    column :test
   end
 
   filter :name
@@ -64,6 +67,7 @@ ActiveAdmin.register Organisation do
   show do
     attributes_table do
       row :name
+      row :test
     end
   end
 

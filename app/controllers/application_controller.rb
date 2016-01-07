@@ -34,4 +34,8 @@ class ApplicationController < ActionController::Base
       I18n.default_locale
     end
   end
+
+  def set_admin_locale
+    I18n.locale = :en
+  end
 end
