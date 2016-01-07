@@ -13,8 +13,17 @@ ActiveAdmin.register Agent do
     end
     column :organisation_name
     column 'Status' do |a|
-      a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
+      if a.invited_by.nil?
+        'Joined (Sign up)'
+      elsif a.invitation_sent_at.nil?
+        'Joined (Link)'
+      elsif a.invitation_accepted_at.nil?
+        'Pending'
+      else
+        'Joined (Email)'
+      end
     end
+
     actions
   end
 
@@ -31,7 +40,15 @@ ActiveAdmin.register Agent do
     end
     column :organisation_name
     column 'Status' do |a|
-      a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
+      if a.invited_by.nil?
+        'Joined (Sign up)'
+      elsif a.invitation_sent_at.nil?
+        'Joined (Link)'
+      elsif a.invitation_accepted_at.nil?
+        'Pending'
+      else
+        'Joined (Email)'
+      end
     end
   end
 
@@ -61,8 +78,17 @@ ActiveAdmin.register Agent do
       end
 
       row 'Status' do |a|
-        a.invitation_sent_at.nil? ? 'Joined (Link)' : a.invitation_accepted_at.nil? ? 'Pending' : 'Joined (Email)'
+        if a.invited_by.nil?
+          'Joined (Sign up)'
+        elsif a.invitation_sent_at.nil?
+          'Joined (Link)'
+        elsif a.invitation_accepted_at.nil?
+          'Pending'
+        else
+          'Joined (Email)'
+        end
       end
+
     end
   end
 
