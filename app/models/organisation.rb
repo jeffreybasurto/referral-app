@@ -6,6 +6,8 @@ class Organisation < ActiveRecord::Base
   has_many :agents, dependent: :destroy, inverse_of: :organisation
   accepts_nested_attributes_for :agents
 
+  scope :non_test, -> { where.not(test: true) }
+
   def total_ref_link_generated_count
     self.agents.sum(:ref_link_generated_count)
   end

@@ -3,6 +3,7 @@ include ActiveJob::TestHelper
 
 RSpec.feature 'Agents registration', type: :feature do
   let!(:org) { create(:organisation) }
+  let!(:test_org) { create(:organisation, name: 'Test Org', test: true) }
   let(:sample) { build :agent, organisation: org }
   let!(:agent) { create(:agent, organisation: org) }
 
@@ -39,14 +40,22 @@ RSpec.feature 'Agents registration', type: :feature do
   end
 
   scenario 'Agent sign up to existing organisation', :js do
-    org_name = org.name
     visit root_path
 
     click_link I18n.t('devise.registrations.sign_up')
+    org_name_field = find('#organisation_name').native
 
-    find('#organisation_name').native.send_key org_name[0..4]
-    expect(page).to have_css('.ui-menu-item', text: org_name)
-    page.find('.ui-menu-item', text: org_name).click
+    #find test orgs
+    org_name_field.send_key test_org.name[0..4]
+    sleep(1) #so that the search has time to complete before checking nothing is there
+    expect(page).to have_no_css('.ui-menu-item', text: test_org.name)
+
+    #find normal orgs
+    fill_in 'organisation[name]', with: '' #clear existing text
+    org_name_field.send_key org.name[0..4]
+    expect(page).to have_css('.ui-menu-item', text: org.name)
+    page.find('.ui-menu-item', text: org.name).click
+
     fill_in 'organisation[agents_attributes][0][email]', with: sample.email
     fill_in 'organisation[agents_attributes][0][password]', with: 'password'
     fill_in 'organisation[agents_attributes][0][password_confirmation]', with: 'password'
@@ -63,8 +72,8 @@ RSpec.feature 'Agents registration', type: :feature do
 
     click_button I18n.t('devise.registrations.sign_up')
 
-    expect(Organisation.count).to eq 1
-    expect(Organisation.last.agents.count).to eq 2
+    expect(Organisation.count).to eq 2
+    expect(org.agents.count).to eq 2
     expect(page).to have_content I18n.t('devise.registrations.signed_up')
     expect(page).to have_content I18n.t('dashboard.greeting', name: sample.name, email: sample.email)
   end

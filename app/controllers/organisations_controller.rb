@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
   skip_before_filter :authenticate_agent!
-  autocomplete :organisation, :name, full: true
+  autocomplete :organisation, :name, full: true, scopes: [:non_test]
 
   def new
     @organisation = Organisation.new
