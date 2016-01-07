@@ -69,6 +69,28 @@ ActiveAdmin.register Organisation do
       row :name
       row :test
     end
+
+    paginated_collection organisation.agents.page(params[:page]).per(10), download_links: false do
+      table_for collection, sortable: false do
+        column :id
+        column 'Agent ID', :agent_id
+        column :email
+        column 'Status' do |a|
+          if a.invited_by.nil?
+            'Joined (Sign up)'
+          elsif a.invitation_sent_at.nil?
+            'Joined (Link)'
+          elsif a.invitation_accepted_at.nil?
+            'Pending'
+          else
+            'Joined (Email)'
+          end
+        end
+        column 'Actions' do |a|
+          "#{link_to 'View agent', admin_agent_path(a.id)}&nbsp;&nbsp;#{link_to 'Edit agent', edit_admin_agent_path(a.id)}".html_safe
+        end
+      end
+    end
   end
 
   sidebar 'Stats', only: :show do
