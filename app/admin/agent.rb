@@ -55,6 +55,11 @@ ActiveAdmin.register Agent do
   show do
     attributes_table_for agent do
       row :email
+      if agent.invited_by_id.present?
+        row 'Inviter' do |a|
+          link_to "#{a.invited_by.name} (#{a.invited_by.email})", admin_agent_path(a.invited_by)
+        end
+      end
       if agent.invitation_accepted_at.nil? & agent.invitation_sent_at.present?
         row :invitation_token
         row :invitation_sent_at
@@ -88,7 +93,30 @@ ActiveAdmin.register Agent do
           'Joined (Email)'
         end
       end
+    end
 
+    panel 'Invited agents' do
+      paginated_collection agent.invitations.page(params[:page]).per(10), download_links: false do
+        table_for collection, sortable: false do
+          column :id
+          column 'Agent ID', :agent_id
+          column :email
+          column 'Status' do |a|
+            if a.invited_by.nil?
+              'Joined (Sign up)'
+            elsif a.invitation_sent_at.nil?
+              'Joined (Link)'
+            elsif a.invitation_accepted_at.nil?
+              'Pending'
+            else
+              'Joined (Email)'
+            end
+          end
+          column 'Actions' do |a|
+            "#{link_to 'View agent', admin_agent_path(a.id)}&nbsp;&nbsp;#{link_to 'Edit agent', edit_admin_agent_path(a.id)}".html_safe
+          end
+        end
+      end
     end
   end
 
@@ -96,7 +124,7 @@ ActiveAdmin.register Agent do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Details' do
       f.input :organisation_id, as: :search_select, url: admin_organisations_path,
-              fields: [:name], display_name: 'name', minimum_input_length: 2
+              fields:               [:name], display_name: 'name', minimum_input_length: 2
       f.input :email, as: :email, required: true
       f.input :password, required: true
       f.input :password_confirmation, required: true
