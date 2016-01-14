@@ -4,7 +4,6 @@ class Organisation < ActiveRecord::Base
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
   has_many :agents, dependent: :destroy, inverse_of: :organisation
-  accepts_nested_attributes_for :agents
 
   scope :non_test, -> { where.not(test: true) }
 

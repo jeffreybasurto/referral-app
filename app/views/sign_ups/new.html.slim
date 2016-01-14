@@ -1,16 +1,15 @@
 #sign-up
   .panel.panel-default
     .panel-body
-      = simple_form_for @organisation do |f|
+      = simple_form_for @agent, url: sign_ups_path do |f|
         .form-header= t('devise.registrations.sign_up')
         .form-inputs
           = f.error_notification
           = field_set_tag 'Organisation details' do
-            = f.input :name, url: autocomplete_organisation_name_organisations_path, as: :autocomplete
+            = f.input :organisation_name, url: autocomplete_organisation_name_sign_ups_path, as: :autocomplete
           = field_set_tag 'Agent details' do
-            = f.simple_fields_for :agents do |o|
-              = o.input :email, required: true, as: :email
-              = render partial: 'agents/fields', locals: { f: o, insurance_inherited: false }
+            = f.input :email, required: true, as: :email
+            = render partial: 'agents/fields', locals: { f: f, insurance_inherited: false }
 
         .form-actions
           = f.button :submit, I18n.t('devise.registrations.sign_up'), class: 'btn-warning'

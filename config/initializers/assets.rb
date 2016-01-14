@@ -13,7 +13,7 @@ Rails.application.config.assets.precompile += %w(devise/passwords.css
                                                  devise/sessions.css
                                                  devise/invitations.css
                                                  agents/registrations.css
-                                                 organisations.css
+                                                 sign_ups.css
                                                  agents.css
                                                  mail_templates.css
 )

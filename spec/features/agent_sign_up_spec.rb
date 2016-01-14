@@ -13,20 +13,20 @@ RSpec.feature 'Agents registration', type: :feature do
 
     click_link I18n.t('devise.registrations.sign_up')
 
-    fill_in 'organisation[name]', with: org_name
-    fill_in 'organisation[agents_attributes][0][email]', with: sample.email
-    fill_in 'organisation[agents_attributes][0][password]', with: 'password'
-    fill_in 'organisation[agents_attributes][0][password_confirmation]', with: 'password'
-    fill_in 'organisation[agents_attributes][0][first_name]', with: sample.first_name
-    fill_in 'organisation[agents_attributes][0][last_name]', with: sample.last_name
-    fill_in 'organisation[agents_attributes][0][phone]', with: sample.phone
-    fill_in 'organisation[agents_attributes][0][dob]', with: sample.dob
-    select sample.insurance_company_name, from: 'organisation[agents_attributes][0][insurance_company_name]'
+    fill_in 'agent[organisation_name]', with: org_name
+    fill_in 'agent[email]', with: sample.email
+    fill_in 'agent[password]', with: 'password'
+    fill_in 'agent[password_confirmation]', with: 'password'
+    fill_in 'agent[first_name]', with: sample.first_name
+    fill_in 'agent[last_name]', with: sample.last_name
+    fill_in 'agent[phone]', with: sample.phone
+    fill_in 'agent[dob]', with: sample.dob
+    select sample.insurance_company_name, from: 'agent[insurance_company_name]'
     choose sample.bank_name
-    fill_in 'organisation[agents_attributes][0][account_name]', with: sample.account_name
-    fill_in 'organisation[agents_attributes][0][account_number]', with: sample.account_number
-    fill_in 'organisation[agents_attributes][0][branch_name]', with: sample.branch_name
-    fill_in 'organisation[agents_attributes][0][branch_address]', with: sample.branch_address
+    fill_in 'agent[account_name]', with: sample.account_name
+    fill_in 'agent[account_number]', with: sample.account_number
+    fill_in 'agent[branch_name]', with: sample.branch_name
+    fill_in 'agent[branch_address]', with: sample.branch_address
 
     expect {
       click_button I18n.t('devise.registrations.sign_up')
@@ -43,7 +43,7 @@ RSpec.feature 'Agents registration', type: :feature do
     visit root_path
 
     click_link I18n.t('devise.registrations.sign_up')
-    org_name_field = find('#organisation_name').native
+    org_name_field = find('#agent_organisation_name').native
 
     #find test orgs
     org_name_field.send_key test_org.name[0..4]
@@ -51,24 +51,24 @@ RSpec.feature 'Agents registration', type: :feature do
     expect(page).to have_no_css('.ui-menu-item', text: test_org.name)
 
     #find normal orgs
-    fill_in 'organisation[name]', with: '' #clear existing text
+    fill_in 'agent[organisation_name]', with: '' #clear existing text
     org_name_field.send_key org.name[0..4]
     expect(page).to have_css('.ui-menu-item', text: org.name)
     page.find('.ui-menu-item', text: org.name).click
 
-    fill_in 'organisation[agents_attributes][0][email]', with: sample.email
-    fill_in 'organisation[agents_attributes][0][password]', with: 'password'
-    fill_in 'organisation[agents_attributes][0][password_confirmation]', with: 'password'
-    fill_in 'organisation[agents_attributes][0][first_name]', with: sample.first_name
-    fill_in 'organisation[agents_attributes][0][last_name]', with: sample.last_name
-    fill_in 'organisation[agents_attributes][0][phone]', with: sample.phone
-    fill_in 'organisation[agents_attributes][0][dob]', with: sample.dob
-    select sample.insurance_company_name, from: 'organisation[agents_attributes][0][insurance_company_name]'
+    fill_in 'agent[email]', with: sample.email
+    fill_in 'agent[password]', with: 'password'
+    fill_in 'agent[password_confirmation]', with: 'password'
+    fill_in 'agent[first_name]', with: sample.first_name
+    fill_in 'agent[last_name]', with: sample.last_name
+    fill_in 'agent[phone]', with: sample.phone
+    fill_in 'agent[dob]', with: sample.dob
+    select sample.insurance_company_name, from: 'agent[insurance_company_name]'
     choose sample.bank_name
-    fill_in 'organisation[agents_attributes][0][account_name]', with: sample.account_name
-    fill_in 'organisation[agents_attributes][0][account_number]', with: sample.account_number
-    fill_in 'organisation[agents_attributes][0][branch_name]', with: sample.branch_name
-    fill_in 'organisation[agents_attributes][0][branch_address]', with: sample.branch_address
+    fill_in 'agent[account_name]', with: sample.account_name
+    fill_in 'agent[account_number]', with: sample.account_number
+    fill_in 'agent[branch_name]', with: sample.branch_name
+    fill_in 'agent[branch_address]', with: sample.branch_address
 
     click_button I18n.t('devise.registrations.sign_up')
 

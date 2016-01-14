@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
   get 'reveal_referral_token', to: 'agents#reveal_referral_link'
 
-  resources :organisations, only: [:new, :create] do
+  resources :sign_ups, only: [:new, :create] do
     get :autocomplete_organisation_name, on: :collection
   end
 
