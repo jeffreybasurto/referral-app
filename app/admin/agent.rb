@@ -20,7 +20,10 @@ ActiveAdmin.register Agent do
 
   index do
     column :id
-    column :agent_id
+    column 'Inviter' do |a|
+      link_to "#{a.invited_by.name} (#{a.invited_by.email})", admin_agent_path(a.invited_by) if a.invited_by.present?
+    end
+    column 'Agent ID', :agent_id
     column :email
     column 'Organisation ID' do |a|
       a.organisation_id
