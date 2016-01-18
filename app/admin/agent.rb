@@ -139,7 +139,7 @@ ActiveAdmin.register Agent do
     f.inputs 'Details' do
       f.input :organisation_id, as: :search_select, url: admin_organisations_path,
               fields:               [:name], display_name: 'name', minimum_input_length: 2
-      f.input 'invited_by_email', as: :autocomplete, url: autocomplete_invited_by_admin_agent_path(agent), input_html: { id_element: '#agent_invited_by_id' }
+      f.input :invited_by_email, as: :autocomplete, url: autocomplete_invited_by_admin_agent_path(agent), input_html: { id_element: '#agent_invited_by_id' }
       f.input :invited_by_id, as: :hidden, required: true
       f.input :email, as: :email, required: true
       f.input :first_name, required: true

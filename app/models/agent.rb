@@ -25,7 +25,7 @@ class Agent < ActiveRecord::Base
   validate :dob_valid?
 
   delegate :name, to: :organisation, prefix: true
-  delegate :email, to: :invited_by, prefix: true
+  delegate :email, to: :invited_by, prefix: true, allow_nil: true
 
   def invite_all(emails = [])
     emails.each do |email|
