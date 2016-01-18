@@ -25,6 +25,7 @@ class Agent < ActiveRecord::Base
   validate :dob_valid?
 
   delegate :name, to: :organisation, prefix: true
+  delegate :email, to: :invited_by, prefix: true
 
   def invite_all(emails = [])
     emails.each do |email|
@@ -52,6 +53,25 @@ class Agent < ActiveRecord::Base
 
   def name
     last_name.present? ? "#{first_name} #{last_name}" : first_name
+  end
+
+  def get_all_children
+    if self.invitations.empty?
+      []
+    else
+      sql = <<-EOF
+      WITH RECURSIVE children (id, invited_by_id) AS (
+        SELECT * FROM agents WHERE invited_by_id = #{self.id}
+        UNION ALL
+        SELECT ag.*
+        FROM agents ag
+        JOIN children ch ON ag.invited_by_id = ch.id
+      )
+      SELECT * from children;
+      EOF
+
+      Agent.find_by_sql(sql)
+    end
   end
 
   private

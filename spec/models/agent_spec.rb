@@ -105,4 +105,24 @@ RSpec.describe Agent, type: :model do
       expect(subject.gen_ref_token_for_link).to eq subject.referral_token
     end
   end
+
+  describe '#get_all_children' do
+    let(:org) { create :organisation }
+    subject { create :agent, organisation: org }
+    let!(:child_1) { create :agent, organisation: org, invited_by: subject }
+    let!(:child_2) { create :agent, organisation: org, invited_by: subject }
+    let!(:child_3) { create :agent, organisation: org, invited_by: subject }
+    let!(:child_4) { create :agent, organisation: org, invited_by: subject }
+    let!(:child_5) { create :agent, organisation: org, invited_by: subject }
+    let!(:child_1_child_1) { create :agent, organisation: org, invited_by: child_1 }
+    let!(:child_2_child_1) { create :agent, organisation: org, invited_by: child_1 }
+    let!(:child_3_child_1) { create :agent, organisation: org, invited_by: child_1 }
+    let!(:child_1_child_2) { create :agent, organisation: org, invited_by: child_2 }
+    let!(:child_2_child_2) { create :agent, organisation: org, invited_by: child_2 }
+
+    it 'returns all children' do
+      expect(subject.get_all_children.count).to eq 10
+      expect(subject.get_all_children).to match_array [child_1, child_2, child_3, child_4, child_5, child_1_child_1, child_2_child_1, child_3_child_1, child_1_child_2, child_2_child_2]
+    end
+  end
 end

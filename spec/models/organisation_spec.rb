@@ -72,4 +72,22 @@ RSpec.describe Organisation, type: :model do
       expect(subject.agents_via_ref_link).to eq 1
     end
   end
+
+  describe '#agents_excluding' do
+    subject { create(:organisation) }
+    let!(:agent_to_exclude) { create(:agent, organisation: subject) }
+    let!(:children_1) { create(:agent, invited_by: agent_to_exclude, organisation: subject) }
+    let!(:children_2) { create(:agent, invited_by: children_1, organisation: subject) }
+    let!(:excluded_ids) { [agent_to_exclude.id, children_1.id, children_2.id] }
+
+    before do
+      10.times { create(:agent, organisation: subject) }
+    end
+
+    it 'returns all agents that are not children of the specified agent' do
+      result = subject.agents_excluding agent_to_exclude
+      expect(result.length).to eq 10
+      expect(result.pluck(:id)).to_not include(excluded_ids)
+    end
+  end
 end

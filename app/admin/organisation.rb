@@ -2,6 +2,8 @@ ActiveAdmin.register Organisation do
   config.sort_order = 'id_asc'
   permit_params :name, :test
 
+
+
   index do
     column :id
     column :name

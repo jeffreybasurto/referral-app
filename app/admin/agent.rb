@@ -1,8 +1,22 @@
 ActiveAdmin.register Agent do
   config.sort_order = 'id_asc'
 
-  permit_params :bank_name, :insurance_company_name, :first_name, :last_name, :phone, :dob, :account_name,
+  permit_params :bank_name, :insurance_company_name, :first_name, :last_name, :phone, :dob, :account_name, :invited_by_id,
                 :account_number, :branch_name, :branch_address, :organisation_id, :email, :password, :password_confirmation
+
+  member_action :autocomplete_invited_by, method: :get do
+    current_agent = Agent.find(params[:id])
+
+    agents = current_agent.organisation.agents_excluding(current_agent).where('lower(email) LIKE LOWER(?)', "%#{params[:term]}%")
+
+    render json: agents.map { |a| { id: a.id, label: a.email, value: a.email } }
+  end
+
+  controller do
+    def scoped_collection
+      super.includes :organisation, :invited_by
+    end
+  end
 
   index do
     column :id
@@ -125,9 +139,9 @@ ActiveAdmin.register Agent do
     f.inputs 'Details' do
       f.input :organisation_id, as: :search_select, url: admin_organisations_path,
               fields:               [:name], display_name: 'name', minimum_input_length: 2
+      f.input 'invited_by_email', as: :autocomplete, url: autocomplete_invited_by_admin_agent_path(agent), input_html: { id_element: '#agent_invited_by_id' }
+      f.input :invited_by_id, as: :hidden, required: true
       f.input :email, as: :email, required: true
-      f.input :password, required: true
-      f.input :password_confirmation, required: true
       f.input :first_name, required: true
       f.input :last_name
       f.input :phone, as: :phone, required: true
