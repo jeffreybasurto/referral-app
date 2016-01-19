@@ -16,12 +16,24 @@ ActiveAdmin.register Agent do
     def scoped_collection
       super.includes :organisation, :invited_by
     end
+
+    before_save do |agent|
+      if agent.invited_by_id.present?
+        agent.invited_by_type = 'Agent'
+      else
+        agent.invited_by_type = nil
+      end
+    end
   end
 
   index do
     column :id
     column 'Inviter' do |a|
-      link_to "#{a.invited_by.name} (#{a.invited_by.email})", admin_agent_path(a.invited_by) if a.invited_by.present?
+      if a.invited_by.present?
+        link_to "#{a.invited_by.name} (#{a.invited_by.email})", admin_agent_path(a.invited_by)
+      else
+        'None'
+      end
     end
     column 'Agent ID', :agent_id
     column :email
@@ -72,9 +84,11 @@ ActiveAdmin.register Agent do
   show do
     attributes_table_for agent do
       row :email
-      if agent.invited_by_id.present?
-        row 'Inviter' do |a|
+      row 'Inviter' do |a|
+        if a.invited_by.present?
           link_to "#{a.invited_by.name} (#{a.invited_by.email})", admin_agent_path(a.invited_by)
+        else
+          'None'
         end
       end
       if agent.invitation_accepted_at.nil? & agent.invitation_sent_at.present?
@@ -141,12 +155,12 @@ ActiveAdmin.register Agent do
     f.semantic_errors *f.object.errors.keys
     f.inputs 'Details' do
       if agent.persisted?
-        f.input :invited_by_email, as: :autocomplete, url: autocomplete_invited_by_admin_agent_path(agent), input_html: { id_element: '#agent_invited_by_id' }
+        f.input :invited_by_email, as: :autocomplete, url: autocomplete_invited_by_admin_agent_path(agent)
       else
         f.input :organisation_id, as: :search_select, url: admin_organisations_path,
                 fields:               [:name], display_name: 'name', minimum_input_length: 2
       end
-      f.input :invited_by_id, as: :hidden, required: true
+      f.input :invited_by_id, as: :hidden, required: true, input_html: { 'data-default-value' => agent.invited_by_id }
       f.input :email, as: :email, required: true
       f.input :first_name, required: true
       f.input :last_name
@@ -161,5 +175,6 @@ ActiveAdmin.register Agent do
     end
 
     actions
+    f.template.render partial: 'js'
   end
 end

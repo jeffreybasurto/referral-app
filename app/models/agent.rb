@@ -23,6 +23,7 @@ class Agent < ActiveRecord::Base
   validates_presence_of :first_name, :phone, :dob, :organisation
   validates_plausible_phone :phone, presence: true, default_country_code: 'ID'
   validate :dob_valid?
+  validates :invited_by_id, numericality: { greater_than: 0, allow_blank: true, message: 'email is not valid' }
 
   delegate :name, to: :organisation, prefix: true
   delegate :email, to: :invited_by, prefix: true, allow_nil: true

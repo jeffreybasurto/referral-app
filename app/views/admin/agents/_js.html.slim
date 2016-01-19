@@ -1,0 +1,10 @@
+coffee:
+  $(->
+    $('#agent_invited_by_email').on('autocompletesearch', (event, ui) ->
+      $('#agent_invited_by_id').val(-1);
+    )
+    $('#agent_invited_by_email').on('railsAutocomplete.select', (event, data) ->
+      console.log(data)
+      $('#agent_invited_by_id').val(data.item.id)
+    )
+  )
