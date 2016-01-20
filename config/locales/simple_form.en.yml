@@ -7,9 +7,13 @@ en:
       default_message: "Please review the problems below:"
     labels:
       defaults:
+        dob: 'Date of Birth'
         remember_me: "Remember me"
     placeholders:
       defaults:
+        organisation_name: 'Organisation Name'
+        dob: 'Date of Birth'
+        insurance_company_name: 'Insurance Company Name'
         name: "Agency Name"
         emails: "Referral Email Addresses"
         email: "Email Address"
@@ -19,7 +23,6 @@ en:
         last_name: "Family Name"
         phone: "Phone Number"
         dob: "Date of Birth"
-        insurance_company_name: "Insurance Company"
         bank_name: "Bank Name"
         account_name: "Account Name"
         branch_name: "Bank Branch"

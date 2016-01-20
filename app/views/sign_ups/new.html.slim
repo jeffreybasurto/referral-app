@@ -6,7 +6,7 @@
         .form-inputs
           = f.error_notification
           = field_set_tag 'Organisation details' do
-            = f.input :organisation_name, url: autocomplete_organisation_name_sign_ups_path, as: :autocomplete
+            = f.input :organisation_name, url: autocomplete_organisation_name_sign_ups_path, as: :autocomplete, placeholder: t('simple_form.placeholders.defaults.organisation_name')
           = field_set_tag 'Agent details' do
             = f.input :email, required: true, as: :email
             = render partial: 'agents/fields', locals: { f: f, insurance_inherited: false }

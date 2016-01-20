@@ -1,4 +1,9 @@
 en:
+  simple_form:
+    labels:
+      agent:
+        new:
+          dob: 'Date of Birth'
   app_name: 'DocDoc Referral'
   update_success: 'Updated successfully'
   errors:

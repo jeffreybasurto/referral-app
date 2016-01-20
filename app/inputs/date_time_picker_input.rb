@@ -7,7 +7,9 @@ class DateTimePickerInput < SimpleForm::Inputs::Base
   end
 
   def input_html_options
-    { class: 'form-control' }
+    result = super
+    result[:class] = 'form-control'
+    result
   end
 
   def span_table

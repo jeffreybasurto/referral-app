@@ -7,9 +7,13 @@ id:
       default_message: "Silahkan memeriksa masalah dibawah ini:"
     labels:
       defaults:
+        dob: 'Date of Birth'
         remember_me: "Ingat saya"
     placeholders:
       defaults:
+        organisation_name: 'Nama Organisasi'
+        dob: 'Tanggal Lahir'
+        insurance_company_name: 'Nama Perusahaan Asuransi'
         name: "Nama Agensi"
         password: "Kata sandi"
         emails: "Alamat email rujukan"
@@ -19,7 +23,6 @@ id:
         password_confirmation: "Konfirmasi kata sandi"
         phone: "Nomor telepon"
         dob: "Tanggal lahir"
-        insurance_company_name: "Perusahaan Asuransi"
         bank_name: "Nama Bank"
         account_name: "Nama Akun Bank"
         branch_name: "Nama Cabang Bank"
