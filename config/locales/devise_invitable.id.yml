@@ -6,9 +6,9 @@ id:
       invitation_instructions:
         subject: "Petunjuk undangan"
         welcome: "Selamat datang dalam keluarga besar DocDoc!"
-        p1: "Anda telah terpilih untuk bergabung dengan puluhan ribu orang lainnya, baik di Indonesia dan  seluruh Asia Tenggara, yang mana telah mengakui Docdoc sebagai aplikasi penting untuk mendapatkan pelayanan kesehatan yang berkualitas bagi Anda, orang-orang yang Anda cintai dan  klien Anda."
-        p2: "Misi Docdoc adalah memastikan setiap pasien kami menemukan profesional medis yang tepat untuk keadaan penyakit mereka tanpa  membayar lebih mahal. Kami menjamin sebisa mungkin setiap pelayanan kesehatan yang dipilih  melalui jasa Docdoc adalah harga termurah. Lebih dari itu kami didukung  tim yang terlatih dan profesional untuk bekerja sama secara komunikatif untuk memastikan pasien menemukan dokter yang paling tepat."
-        p3: "Langkah selanjutnya untuk bergabung dengan DocDoc silahkan klik tautan dibawah ini. Kami akan mengirimkan informasi lengkap mengenai DocDoc  dan bagaimana kita bekerjasama untuk membantu setiap orang yang Anda cintai dan klien Anda."
+        p1: "Anda telah terpilih untuk bergabung dengan puluhan ribu orang lainnya, baik di Indonesia dan seluruh Asia Tenggara, yang mana telah mengakui DocDoc sebagai aplikasi penting untuk mendapatkan pelayanan kesehatan yang berkualitas bagi Anda, orang-orang yang Anda cintai dan klien Anda."
+        p2: "Misi DocDoc adalah memastikan setiap pasien kami menemukan profesional medis yang tepat untuk keadaan penyakit mereka tanpa membayar lebih mahal. Kami menjamin sebisa mungkin setiap pelayanan kesehatan yang dipilih melalui jasa DocDoc adalah harga termurah. Lebih dari itu kami didukung tim yang terlatih dan profesional untuk bekerja sama secara komunikatif untuk memastikan pasien menemukan dokter yang paling tepat."
+        p3: "Langkah selanjutnya untuk bergabung dengan DocDoc silahkan klik tautan dibawah ini. Kami akan mengirimkan informasi lengkap mengenai DocDoc dan bagaimana kita bekerjasama untuk membantu setiap orang yang Anda cintai dan klien Anda."
         copy_to_browser_html: "Silahkan Anda salin/tempel tautan ini ke browser Anda: %{url}"
         your_email_html: "Email yang Anda daftarkan adalah %{email}"
         accept: "Undangan diterima"
