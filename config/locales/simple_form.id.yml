@@ -10,7 +10,7 @@ id:
         dob: 'Date of Birth'
         remember_me: "Ingat saya"
     placeholders:
-      defaults:
+      defaults: &attribute_names
         organisation_name: 'Nama Organisasi'
         dob: 'Tanggal Lahir'
         insurance_company_name: 'Nama Perusahaan Asuransi'
@@ -28,3 +28,6 @@ id:
         branch_name: "Nama Cabang Bank"
         branch_address: "Alamat Cabang Bank"
         account_number: "Nomor rekening"
+  activerecord:
+    attributes:
+      agent: *attribute_names

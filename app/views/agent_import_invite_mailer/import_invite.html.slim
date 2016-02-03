@@ -1,0 +1,14 @@
+- I18n.with_locale @agent.locale.to_sym do
+  p= t('devise.mailer.invitation_instructions.welcome')
+  p= t('devise.mailer.invitation_instructions.p1')
+  p= t('devise.mailer.invitation_instructions.p2')
+  p= t('devise.mailer.invitation_instructions.p3')
+| --------------------------------------------------
+- I18n.with_locale @agent.locale do
+  p= link_to t('devise.mailer.invitation_instructions.accept'), root_path, class: 'btn btn-warning'
+  p= t('devise.mailer.invitation_instructions.copy_to_browser_html', url: root_path)
+  p= t('devise.mailer.invitation_instructions.your_email_html', email: mail_to(@agent.email)).html_safe
+| --------------------------------------------------
+br
+br
+= image_tag 'docdoc_logo.png'

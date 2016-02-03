@@ -10,7 +10,7 @@ en:
         dob: 'Date of Birth'
         remember_me: "Remember me"
     placeholders:
-      defaults:
+      defaults: &attribute_names
         organisation_name: 'Organisation Name'
         dob: 'Date of Birth'
         insurance_company_name: 'Insurance Company Name'
@@ -28,3 +28,7 @@ en:
         branch_name: "Bank Branch"
         branch_address: "Bank Branch Address"
         account_number: "Account Number"
+        inviter_email: "Inviter Email"
+  activerecord:
+    attributes:
+      agent: *attribute_names

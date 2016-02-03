@@ -93,7 +93,7 @@ RSpec.feature 'Agents registration', type: :feature do
   scenario 'Agent sign up from link' do
     visit new_agent_registration_path(invitation_token: agent.referral_token)
 
-    fill_in 'Email', with: sample.email
+    fill_in 'agent[email]', with: sample.email
     fill_in_common_fields
 
     expect {

@@ -1,0 +1,23 @@
+= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.min.js'
+
+= simple_form_for :agent, url: process_csv_import_admin_agents_path, method: :post do |f|
+  = f.input :csv, as: :file, label: 'CSV File', required: true, input_html: { accept: 'text/csv' }
+  = f.submit 'Import CSV'
+
+javascript:
+  window.csv_headers = #{raw Agent::CSV_HEADERS.map { |header| I18n.t("simple_form.placeholders.defaults.#{header}") }};
+
+coffee:
+  $('#agent_csv').change () ->
+    $(this).parse
+      config:
+        preview: 1
+        complete: (results) ->
+          headers = results.data[0]
+          headers_diff = $(window.csv_headers).not(headers).get();
+          if headers_diff.length > 0
+            alert("Missing the following columns: #{headers_diff.join(', ')}")
+            $('#agent_csv').val('')
+          unsupported_columns = $(headers).not(window.csv_headers).get();
+          if unsupported_columns.length > 0
+            alert("The following columns will be discarded: #{unsupported_columns.join(', ')}")

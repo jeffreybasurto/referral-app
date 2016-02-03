@@ -1,0 +1,35 @@
+.panel.panel-default
+  .panel-body
+    = render partial: 'admin/agents/csv_import_form'
+
+table
+  thead
+    th Email Address
+    th Given Name
+    th Family Name
+    th Phone Number
+    th Date of Birth
+    th Insurance Company Name
+    th Bank Name
+    th Bank Branch
+    th Bank Branch Address
+    th Account Name
+    th Account Number
+    th Inviter Email
+    th Errors
+  tbody
+    - @invalid_rows.each do |row|
+      tr
+        td= row[:email]
+        td= row[:first_name]
+        td= row[:last_name]
+        td= row[:phone]
+        td= row[:dob]
+        td= row[:insurance_company_insurance]
+        td= row[:bank_name]
+        td= row[:branch_name]
+        td= row[:branch_address]
+        td= row[:account_name]
+        td= row[:account_number]
+        td= row[:inviter_email]
+        td= row[:errors]

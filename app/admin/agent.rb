@@ -12,6 +12,27 @@ ActiveAdmin.register Agent do
     render json: agents.map { |a| { id: a.id, label: a.email, value: a.email } }
   end
 
+  collection_action :process_csv_import, method: :post do
+    uploaded_csv = params[:agent][:csv]
+    file_name = Rails.root.join('tmp', uploaded_csv.original_filename)
+    File.open(file_name, 'wb') do |file|
+      file.write(uploaded_csv.read)
+    end
+    result = Agent.import_csv(file_name)
+
+    if result[:success]
+      redirect_to csv_import_admin_agents_path, notice: 'Imported successfully.'
+    else
+      @invalid_rows = result[:invalid_rows]
+      @page_title = 'CSV Import Errors'
+      render 'csv_errors', layout: 'active_admin'
+    end
+  end
+
+  collection_action :csv_import, method: :get do
+    render 'csv_import', layout: 'active_admin'
+  end
+
   controller do
     def scoped_collection
       super.includes :organisation, :invited_by
@@ -24,6 +45,10 @@ ActiveAdmin.register Agent do
         agent.invited_by_type = nil
       end
     end
+  end
+
+  action_item :only => :index do
+    link_to('Import CSV', csv_import_admin_agents_path)
   end
 
   index do
@@ -79,6 +104,18 @@ ActiveAdmin.register Agent do
         'Joined (Email)'
       end
     end
+
+    # column :email
+    # column :first_name
+    # column :last_name
+    # column :phone
+    # column :dob
+    # column :insurance_company_name
+    # column :bank_name
+    # column :account_name
+    # column :branch_name
+    # column :branch_address
+    # column :account_number
   end
 
   show do
@@ -176,5 +213,9 @@ ActiveAdmin.register Agent do
 
     actions
     f.template.render partial: 'js'
+  end
+
+  sidebar 'Stats', only: :show do
+    render partial: 'csv_import_form', locals: { agent: agent }
   end
 end

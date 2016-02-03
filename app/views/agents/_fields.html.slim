@@ -6,6 +6,8 @@
 = f.input :dob, as: :date_time_picker, required: true, placeholder: t('simple_form.placeholders.defaults.dob')
 - if insurance_inherited
   = f.input :insurance_company_name, collection: Agent::INSURANCE_COMPANIES, readonly: true
+- elsif f.object.insurance_company_name
+  = f.input :insurance_company_name, collection: [t('simple_form.placeholders.defaults.insurance_company_name')] + Agent::INSURANCE_COMPANIES, required: true, include_blank: false, disabled: t('simple_form.placeholders.defaults.insurance_company_name')
 - else
   = f.input :insurance_company_name, collection: [t('simple_form.placeholders.defaults.insurance_company_name')] + Agent::INSURANCE_COMPANIES, required: true, include_blank: false, selected: t('simple_form.placeholders.defaults.insurance_company_name'), disabled: t('simple_form.placeholders.defaults.insurance_company_name')
 .form-group

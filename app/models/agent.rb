@@ -1,9 +1,10 @@
 class Agent < ActiveRecord::Base
   default_scope { order('id ASC') }
 
-  BANK_NAMES          = %w(BCA Mandiri)
-  INSURANCE_COMPANIES = %w(OTHERS\ NOT\ LISTED ACE\ LIFE\ ASSURANCE ADISARANA\ WANAARTHA AIA\ FINANCIAL ALLIANZ\ LIFE\ INDONESIA AVIVA\ INDONESIA AVRIST\ ASSURANCE AXA\ FINANCIAL\ INDONESIA AXA\ LIFE\ INDONESIA AXA\ MANDIRI\ FINANCIALSERVICES BAKRIE\ LIFE BNI\ LIFE\ INSURANCE BRINGIN\ JIWA\ SEJAHTERA BUMIPUTERA\ 1912 CENTRAL\ ASIA\ FINANCIAL CENTRAL\ ASIA\ RAYA CIGNA CIMB\ SUN\ LIFE COMMONWEALTH\ LIFE EQUITY\ LIFE\ INDONESIA FINANCIAL\ WIRAMITRA\ DANADYAKSA GENERALI\ INDONESIA GREAT\ EASTERN\ LIFE\ INDONESIA HANWHA\ LIFE\ INSURANCE\ INDONESIA HEKSA\ EKA\ LIFE\ INSURANCE INDOLIFE\ PENSIONTAMA INDOSURYA\ SUKSES INHEALTH\ INDONESIA JIWASRAYA KRESNA\ LIFE MANULIFE\ INDONESIA MASKAPAI\ REASURANSI\ INDONESIA MEGA\ INDONESIA MNC\ LIFE\ ASSURANCE PANIN\ DAI-ICHI\ LIFE PASARAYA\ LIFE PRUDENTIAL\ LIFE\ ASSURANCE REASURANSI\ INTERNATIONAL\ INDONESIA REASURANSI\ NASIONAL\ INDONESIA RECAPITAL RELIANCE\ INDONESIA SEQUIS\ FINANCIAL SEQUIS\ LIFE SINARMAS\ MSIG SUN\ LIFE\ FINANCIAL\ INDONESIA SYARIAH\ ALAMIN SYARIAH\ AMANAHJIWA\ GIRI\ ARTHA TAKAFUL\ KELUARGA TOKIO\ MARINE\ LIFE\ INSURANCE\ INDONESIA TUGU\ MANDIRI TUGU\ REASURANSI\ INDONESIA ZURICH\ TOPAS\ LIFE)
-  PERMITTED_ATTRIBUTES = %i(email invitation_token bank_name insurance_company_name first_name last_name phone dob account_name account_number branch_name branch_address password password_confirmation organisation_id invited_by_id invited_by_type)
+  BANK_NAMES           = %w(BCA Mandiri).freeze
+  INSURANCE_COMPANIES  = %w(OTHERS\ NOT\ LISTED ACE\ LIFE\ ASSURANCE ADISARANA\ WANAARTHA AIA\ FINANCIAL ALLIANZ\ LIFE\ INDONESIA AVIVA\ INDONESIA AVRIST\ ASSURANCE AXA\ FINANCIAL\ INDONESIA AXA\ LIFE\ INDONESIA AXA\ MANDIRI\ FINANCIALSERVICES BAKRIE\ LIFE BNI\ LIFE\ INSURANCE BRINGIN\ JIWA\ SEJAHTERA BUMIPUTERA\ 1912 CENTRAL\ ASIA\ FINANCIAL CENTRAL\ ASIA\ RAYA CIGNA CIMB\ SUN\ LIFE COMMONWEALTH\ LIFE EQUITY\ LIFE\ INDONESIA FINANCIAL\ WIRAMITRA\ DANADYAKSA GENERALI\ INDONESIA GREAT\ EASTERN\ LIFE\ INDONESIA HANWHA\ LIFE\ INSURANCE\ INDONESIA HEKSA\ EKA\ LIFE\ INSURANCE INDOLIFE\ PENSIONTAMA INDOSURYA\ SUKSES INHEALTH\ INDONESIA JIWASRAYA KRESNA\ LIFE MANULIFE\ INDONESIA MASKAPAI\ REASURANSI\ INDONESIA MEGA\ INDONESIA MNC\ LIFE\ ASSURANCE PANIN\ DAI-ICHI\ LIFE PASARAYA\ LIFE PRUDENTIAL\ LIFE\ ASSURANCE REASURANSI\ INTERNATIONAL\ INDONESIA REASURANSI\ NASIONAL\ INDONESIA RECAPITAL RELIANCE\ INDONESIA SEQUIS\ FINANCIAL SEQUIS\ LIFE SINARMAS\ MSIG SUN\ LIFE\ FINANCIAL\ INDONESIA SYARIAH\ ALAMIN SYARIAH\ AMANAHJIWA\ GIRI\ ARTHA TAKAFUL\ KELUARGA TOKIO\ MARINE\ LIFE\ INSURANCE\ INDONESIA TUGU\ MANDIRI TUGU\ REASURANSI\ INDONESIA ZURICH\ TOPAS\ LIFE).freeze
+  PERMITTED_ATTRIBUTES = %i(email invitation_token bank_name insurance_company_name first_name last_name phone dob account_name account_number branch_name branch_address password password_confirmation organisation_id invited_by_id invited_by_type).freeze
+  CSV_HEADERS          = %w(email first_name last_name phone dob insurance_company_name bank_name account_name branch_name branch_address account_number inviter_email).freeze
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -72,6 +73,61 @@ class Agent < ActiveRecord::Base
       EOF
 
       Agent.find_by_sql(sql)
+    end
+  end
+
+  def self.import_csv(file_name)
+    require 'smarter_csv'
+
+    key_mappings = {
+      email_address:       :email,
+      given_name:          :first_name,
+      family_name:         :last_name,
+      phone_number:        :phone,
+      date_of_birth:       :dob,
+      bank_branch_address: :branch_address,
+      bank_branch:         :branch_name
+    }
+
+    invalid_rows = []
+    new_agent_ids = []
+    Agent.transaction do
+      SmarterCSV.process(file_name, key_mapping: key_mappings) do |row|
+        row     = row.first
+        inviter = Agent.where(email: row.delete(:inviter_email)).take
+
+        if inviter
+          agent                 = Agent.new(row.slice(*CSV_HEADERS.map(&:to_sym)))
+          agent.password        = agent.email
+          agent.invited_by_id   = inviter.id
+          agent.invited_by_type = Agent
+          agent.locale          = inviter.locale
+          agent.organisation_id = inviter.organisation_id
+
+          if agent.valid?
+            agent.save
+            new_agent_ids << agent.id
+          else
+            row[:errors] = agent.errors.full_messages.join('. ')
+            invalid_rows << row
+          end
+        else
+          row[:errors] = "Can't find inviter with email: '#{row[:inviter_email]}'"
+          invalid_rows << row
+        end
+
+      end
+
+      unless invalid_rows.empty?
+        raise ActiveRecord::Rollback, 'Invalid records found in the CSV.'
+      end
+    end
+
+    if invalid_rows.empty?
+      new_agent_ids.each { |id| AgentImportInviteMailer.import_invite(id).deliver_later }
+      { success: true }
+    else
+      { success: false, invalid_rows: invalid_rows }
     end
   end
 

@@ -54,6 +54,8 @@ gem 'select2-rails', '~> 3.5.9'
 gem 'activeadmin_addons'
 gem 'wysiwyg-rails', '2.0.0.pre.rc.3'
 gem 'rails-jquery-autocomplete'
+gem 'smarter_csv'
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'
