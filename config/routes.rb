@@ -1,3 +1,5 @@
+require 'sidekiq/web'
+
 Rails.application.routes.draw do
   devise_for :agents, controllers: { registrations: 'agents/registrations' }
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -8,6 +10,10 @@ Rails.application.routes.draw do
     filter :pagination
   end
   get 'reveal_referral_token', to: 'agents#reveal_referral_link'
+
+  authenticate :admin_user do
+    mount Sidekiq::Web => 'admin/sidekiq'
+  end
 
   resources :sign_ups, only: [:new, :create] do
     get :autocomplete_organisation_name, on: :collection
