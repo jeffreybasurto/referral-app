@@ -1,2 +1,2 @@
 web: bundle exec thin start -p $PORT
-worker: bundle exec sidekiq -e production -q mailers
+worker: bundle exec sidekiq -e production
